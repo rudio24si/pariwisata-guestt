@@ -1,0 +1,18 @@
+.error-inner {
+  max-width: 710px;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  text-align: center;
+}
+
+.error-inner > .heading {
+  margin-block-start: 40px;
+}
+
+.error-inner > .heading + .text {
+  margin-block-start: 16px;
+}
+
+.error-inner > .text + .button {
+  margin-block-start: 40px;
+}

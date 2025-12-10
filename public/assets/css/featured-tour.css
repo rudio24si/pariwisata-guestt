@@ -1,0 +1,50 @@
+.filter-list {
+  --color-background: rgba(230, 248, 254, 1);
+  --color-foreground: rgba(3, 15, 18, 1);
+  --color-foreground-heading: rgba(3, 15, 18, 0.6); }
+
+.featured-tour .section-headings-left {
+  max-width: 75%;
+  width: 75%; }
+
+.featured-tour .section-headings .heading + .text {
+  -webkit-margin-before: 16px;
+  margin-block-start: 16px; }
+
+.tab-buttons {
+  -webkit-margin-before: 40px;
+  margin-block-start: 40px; }
+
+.filter-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 16px;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+
+.featured-tour .headings-width {
+  max-width: 900px; }
+
+.featured-tour .tab-btn.heading {
+  --font-heading--weight: 500; }
+
+.tab-contents {
+  -webkit-margin-before: 50px;
+  margin-block-start: 50px; }
+
+@media (max-width: 991px) {
+  .featured-tour .section-headings-left {
+    max-width: 68%;
+    width: 68%; } }
+
+@media (max-width: 767px) {
+  .featured-tour .section-headings-left {
+    max-width: 100%;
+    width: 100%; }
+  .tab-buttons {
+    -webkit-margin-before: 32px;
+    margin-block-start: 32px; } }

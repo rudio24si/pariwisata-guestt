@@ -1,0 +1,229 @@
+.destination-list > div + div {
+  margin-block-start: 30px;
+}
+
+.destination-list {
+  margin-inline-start: 45px;
+}
+
+.showing-text span {
+  color: var(--color-primary-hover);
+}
+
+.sort-wrap {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.sort-button input {
+  border: none;
+  padding: 0;
+  min-height: auto;
+  font-size: 18px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.sort-button input::placeholder {
+  --color-foreground: rgba(3, 15, 18, 1);
+  font-size: 18px;
+  color: var(--color-foreground);
+  font-weight: 600;
+}
+
+.sort-wrap .dropdown-button:hover svg,
+.sort-wrap .sort-button svg {
+  --color-foreground: rgba(3, 15, 18, 1);
+  color: var(--color-foreground);
+}
+
+.sort-wrap .dropdown-button {
+  padding: 0;
+  border: none;
+}
+
+.sort-wrap .dropdown-wrap {
+  width: 100%;
+}
+
+.sort-wrap .sort-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.sort-wrap .dropdown-button {
+  cursor: pointer;
+}
+
+.sort-wrap .dropdown-list-wrap {
+  bottom: auto;
+  top: 140%;
+}
+
+.sort-wrap .dropdown-list-wrap .dropdown-list > li {
+  cursor: pointer;
+}
+
+.sort-wrap .dropdown-list-wrap .dropdown-list > li:hover .text {
+  --color-foreground: rgba(0, 183, 241, 1);
+  transition: all 0.3 ease-in-out;
+}
+
+.sort-wrap .dropdown-list > li + li {
+  margin-block-start: 16px;
+}
+
+.destination-list .product-card.card-horizontal {
+  display: flex;
+  align-items: center;
+}
+
+.destination-list .product-card.card-horizontal .image {
+  width: 300px;
+  align-self: stretch;
+  height: auto;
+}
+
+.destination-list .product-card.card-horizontal .image img {
+  object-fit: cover;
+  height: 100%;
+}
+
+.destination-list .product-card .content {
+  padding: 24px;
+  width: calc(100% - 300px);
+}
+
+.destination-list .product-card .badge {
+  --badge-padding: 6px 12px;
+  --badge-radius: 5px;
+  top: 16px;
+  right: 16px;
+  left: auto;
+}
+
+.destination-list .product-card .card-person-time {
+  gap: 12px;
+  margin-block-start: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.destination-list .product-card .review {
+  position: static;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  row-gap: 0;
+}
+
+.destination-list .review-price-wrap {
+  margin-block-start: 16px;
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.destination-list .product-card .card-price {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.destination-gallery .wishlist-icon,
+.destination-list .wishlist-icon {
+  --color-border: rgba(0, 183, 241, 1);
+  --badge-radius: 8px;
+  --badge-padding: 6px 16px;
+  position: static;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid var(--color-border);
+  min-height: 56px;
+  min-width: fit-content;
+}
+
+.destination-list .wishlist-icon svg {
+  min-width: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.destination-list .button-wishlist-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: space-between;
+  margin-block-start: 24px;
+  padding-block-start: 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+.destination-list .button-wishlist-wrap .button {
+  --style-border-radius-buttons-primary: 8px;
+  width: 100%;
+}
+
+.destination-list .product-card .person-time-item {
+  align-items: flex-start;
+}
+
+.dropdown-list.content-more {
+  display: none;
+  margin-block-start: 12px;
+}
+
+
+@media (max-width: 1199px) {
+  .destination-list {
+    margin-inline-start: 24px;
+  }
+}
+
+@media (max-width: 991px) {
+  .destination-list {
+    margin-inline-start: 0;
+    margin-block-start: 24px;
+  }
+
+  .destination-page .open-sidebar {
+    margin-block-end: 0;
+    margin-inline-start: 0;
+  }
+
+  .destination-page .dropdown-list-wrap {
+    bottom: auto;
+    top: 100%;
+  }
+
+  .destination-page .dropdown-button svg {
+    --color-foreground: rgba(0, 0, 0, 1);
+  }
+}
+
+@media (max-width: 767px) {
+  .destination-list .product-card.card-horizontal {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .destination-list .product-card.card-horizontal .image {
+    width: 100%;
+  }
+
+  .destination-list .product-card .content {
+    padding: 24px 16px;
+    width: 100%;
+  }
+
+  .destination-list .wishlist-icon {
+    --badge-padding: 6px 12px;
+    min-height: 48px;
+  }
+}

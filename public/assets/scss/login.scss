@@ -1,0 +1,36 @@
+.login-page .booking-login {
+  max-width: 600px;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  padding: 32px;
+}
+
+.login-page .booking-login > .button,
+.login-form {
+  margin-block-start: 24px;
+}
+
+.login-page .checkbox-label {
+  --color-border: rgba(0, 183, 241, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.forget-password-wrap {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.booking-login > .heading + .text {
+  margin-block-start: 16px;
+}
+
+@media (max-width: 767px) {
+  .login-page .booking-login {
+    padding: 24px 16px;
+  }
+}

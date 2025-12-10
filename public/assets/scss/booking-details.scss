@@ -1,0 +1,412 @@
+.booking-details .filter-list {
+  gap: 64px;
+}
+
+.booking-details .section-content {
+  margin-block-start: 50px;
+}
+
+.booking-tab {
+  --color-border: rgba(0, 183, 241, 1);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 24px;
+  display: flex;
+  width: fit-content;
+}
+
+.booking-details .tab-btn {
+  position: relative;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
+
+.booking-details .filter-item:not(:first-child) .tab-btn::after {
+  --color-border: rgba(0, 183, 241, 1);
+  content: "";
+  position: absolute;
+  left: -65px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 65px;
+  height: 1px;
+  background-color: var(--color-border);
+  z-index: -1;
+}
+
+.booking-destination .section-headings-horizontal {
+  align-items: flex-start;
+}
+
+.booking-item {
+  --color-border: rgba(0, 183, 241, 1);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-block-start: 24px;
+  border: 1px solid var(--color-border);
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.booking-item img {
+  width: 63px;
+  height: 63px;
+  display: flex;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.booking-date {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: space-between;
+  margin-block-start: 40px;
+}
+
+.booking-details .tab-item > div + div {
+  margin-block-start: 40px;
+}
+
+.booking-date-icons {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.booking-date-icons .icon-line {
+  min-width: 50px;
+  width: 50px;
+  height: 9px;
+}
+
+.booking-date-icons .svg-wrapper svg {
+  color: rgba(3, 15, 18, 1);
+}
+
+.booking-payment .pay-option + .pay-option {
+  margin-block-start: 16px;
+}
+
+.pay-option {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  justify-content: space-between;
+  padding: 32px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.pay-option.active {
+  --color-foreground-heading: rgba(255, 255, 255, 1);
+  --color-foreground: rgba(255, 255, 255, 1);
+  --color-background: rgba(0, 183, 241, 1);
+  background: var(--color-background);
+}
+
+.pay-text > .heading + .text {
+  margin-top: 8px;
+}
+
+.pay-option .btn-radio {
+  position: relative;
+}
+
+.pay-option .btn-radio::after {
+  --color-border: rgba(3, 15, 18, 0.7);
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  outline: 2px solid var(--color-border);
+  outline-offset: 4px;
+}
+
+.pay-option.active .btn-radio::after {
+  --color-border: rgba(255, 255, 255, 1);
+  --color-background: rgba(255, 255, 255, 1);
+  background: var(--color-background);
+}
+
+.booking-login > form > div + * {
+  margin-block-start: 16px;
+}
+
+.booking-details .button {
+  --style-border-radius-buttons-secondary: 8px;
+  --style-border-radius-buttons-primary: 8px;
+}
+
+.booking-login .button {
+  width: 100%;
+}
+
+.booking-login > .button {
+  margin-block-start: 16px;
+}
+
+.booking-login .divider-or {
+  margin: 24px 0;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: nowrap;
+}
+
+.divider-or span {
+  --color-background: rgba(177, 181, 182, 1);
+  width: 100%;
+  height: 1px;
+  background: var(--color-background);
+}
+
+.booking-with-accounts {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.booking-with-accounts .single-account {
+  --color-border: rgba(0, 183, 241, 1);
+  border: 1px solid var(--color-border);
+  padding: 14px 24px;
+  min-width: calc(33.33% - 16px);
+  min-height: 56px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.booking-with-accounts .single-account svg {
+  min-width: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.booking-price-details .review {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-block-start: 12px;
+}
+
+.booked-destination {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.booked-destination img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.booking-price-details .border-full-width {
+  margin-block-start: 16px;
+}
+
+.booking-price-details .protected-by-text {
+  margin-block-start: 16px;
+}
+
+.booking-price-details .price-details {
+  margin-block-start: 16px;
+}
+
+.booking-price-details .price-item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: space-between;
+  margin-block-start: 16px;
+}
+
+.booking-price-details .price-item:last-child {
+  border-top: 1px solid var(--color-border);
+  padding-block-start: 16px;
+}
+
+.payment-info form,
+.personal-info form {
+  margin-block-start: 24px;
+}
+
+.payment-info form .field > label + textarea,
+.payment-info form .field > label + input,
+.personal-info form .field > label + textarea,
+.personal-info form .field > label + input {
+  margin-block-start: 10px;
+}
+
+.personal-info .grid-gap {
+  row-gap: 24px;
+}
+
+.pagination-button {
+  margin-block-start: 40px;
+}
+
+.payment-info .payment-lists {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-block-start: 10px;
+}
+
+.payment-info .pay-item {
+  --color-background: rgba(230, 248, 254, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(33% - 5px);
+  height: 50px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  background: var(--color-background);
+}
+
+.payment-info .pay-item.paypall img {
+  width: 74px;
+  height: 22px;
+}
+
+.payment-info .pay-item.stripe img,
+.payment-info .pay-item.mastercard img {
+  width: 57px;
+  height: 24px;
+}
+
+.booking-confirm .confirm-text {
+  margin-block-start: 40px;
+  text-align: center;
+  border: 1px solid var(--color-border);
+  padding: 70px;
+  border-radius: 10px;
+}
+
+.booking-confirm .confirm-icon {
+  --color-background: rgba(0, 183, 241, 1);
+  width: 108px;
+  height: 108px;
+  background: var(--color-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  --color-foreground: rgba(255, 255, 255, 1);
+  color: var(--color-foreground);
+  border-radius: 100%;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+
+.booking-confirm .confirm-icon + .heading {
+  margin-block-start: 24px;
+}
+
+.booking-confirm .confirm-text .heading + .text {
+  margin-block-start: 12px;
+}
+
+@media (min-width: 1199px) {
+  .booking-details .row {
+    --bs-gutter-x: 60px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .booking-details .filter-list {
+    gap: 32px;
+  }
+
+  .booking-details .filter-item:not(:first-child) .tab-btn::after {
+    left: -34px;
+  }
+
+  .booked-destination {
+    flex-wrap: wrap;
+  }
+
+  .booking-details .row {
+    --bs-gutter-x: 40px;
+  }
+}
+
+@media (max-width: 991px) {
+  .booking-price-details.custom-shadow.radius12 {
+    margin-block-start: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .booking-details .section-content {
+    margin-block-start: 40px;
+  }
+
+  .booking-details .filter-item:not(:first-child) .tab-btn::after {
+    content: none;
+  }
+
+  .booking-tab {
+    padding: 16px;
+  }
+
+  .booking-details .filter-list {
+    gap: 24px;
+  }
+
+  .booking-item {
+    flex-wrap: wrap;
+  }
+
+  .booking-date-icons {
+    gap: 16px;
+  }
+
+  .booking-date-icons .icon-line {
+    min-width: 30px;
+    width: 30px;
+    height: 9px;
+  }
+
+  .booking-date-icons .icon-50 {
+    min-width: 30px;
+    height: 30px;
+  }
+
+  .custom-shadow {
+    padding: 16px;
+  }
+
+  .pay-option {
+    padding: 16px;
+  }
+
+  .pay-option .btn-radio::after {
+    width: 12px;
+    height: 12px;
+  }
+
+  .booking-with-accounts .single-account {
+    padding: 10px 24px;
+    min-height: 48px;
+  }
+
+  .booking-confirm .confirm-text {
+    padding: 24px;
+  }
+
+  .booking-confirm .confirm-icon {
+    width: 90px;
+    height: 90px;
+  }
+}

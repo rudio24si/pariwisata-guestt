@@ -1,0 +1,149 @@
+.subscribe {
+  --color-foreground-heading: rgba(255, 255, 255, 1);
+  --color-input-background: rgba(255, 255, 255, 1);
+}
+
+.subscribe-inner {
+  position: relative;
+  min-height: 313px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.subscribe-inner .content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 32px 16px;
+  max-width: 664px;
+}
+
+.subscribe-form {
+  --color-input-hover-text: rgba(3, 15, 18, 1);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-block-start: 45px;
+  justify-content: space-between;
+}
+
+.subscribe-form .field {
+  max-width: calc(70% - 12px);
+  width: calc(70% - 12px);
+}
+
+.subscribe-form .form-button {
+  max-width: calc(30% - 12px);
+  width: calc(30% - 12px);
+}
+
+.subscribe-form .form-button .button {
+  width: 100%;
+  min-height: 60px;
+  --font-button-size: 18px;
+}
+
+@media (max-width: 767px) {
+  .subscribe-form .form-button,
+  .subscribe-form .field {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .subscribe-form {
+    flex-wrap: wrap;
+  }
+
+  .subscribe-form .form-button .button {
+    min-height: 56px;
+  }
+
+  .subscribe-form {
+    margin-block-start: 36px;
+  }
+}
+
+/*--- Subscribe 2 ---*/
+.subscribe-2 .subscribe-wrap {
+  --color-background: rgba(230, 248, 254, 1);
+  background: var(--color-background);
+}
+
+.subscribe-2 .content {
+  padding: 24px 40px;
+}
+
+.subscribe-2 .content > .subheading {
+  --color-background: rgba(0, 183, 241, 1);
+  --color-foreground-subheading: rgba(255, 255, 255, 1);
+  background: var(--color-background);
+  width: fit-content;
+  min-height: 50px;
+  padding: 12px 24px;
+  border-radius: 40px;
+  font-weight: 500;
+}
+
+.subscribe-2 .content > .subheading + .heading {
+  margin-block-start: 24px;
+}
+
+.subscribe-2 .content > .form + .text {
+  margin-block-start: 16px;
+}
+
+.subscribe-2 .subscribe-form .field {
+  max-width: 480px;
+  width: 480px;
+}
+
+.subscribe-2 .input-wrap {
+  min-height: 58px;
+  border-radius: 50px;
+  padding: 0;
+}
+
+.subscribe-2 .form-button .button--primary {
+  --style-border-radius-buttons-primary: 50px;
+}
+
+.subscribe-2 .subscribe-form .form-button {
+  max-width: fit-content;
+  width: fit-content;
+}
+
+.subscribe-2 .subscribe-form .form-button .button {
+  width: 140px;
+  min-height: 58px;
+  height: 58px;
+  --font-button-size: 18px;
+}
+
+.subscribe-2 .input-wrap input {
+  padding-inline-start: 24px;
+  padding-inline-end: 16px;
+}
+
+.subscribe-2 .image img {
+  object-fit: cover;
+  height: auto;
+}
+
+@media (max-width: 1199px) {
+  .subscribe-2 .content {
+    padding: 24px 24px;
+  }
+}
+
+@media (max-width: 991px) {
+  .subscribe-2 .image img {
+    max-height: 450px;
+  }
+}
+
+@media (max-width: 767px) {
+  .subscribe-2 .content {
+    padding: 24px 16px;
+  }
+}

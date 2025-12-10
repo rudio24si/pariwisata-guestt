@@ -1,0 +1,94 @@
+.instagram {
+  --color-foreground: rgba(255, 255, 255, 1);
+  --color-overlay: rgba(0, 0, 0, 0.4);
+  overflow: hidden; }
+
+.insta-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden; }
+
+.insta-item {
+  min-width: 200px; }
+
+.insta-link {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  overflow: hidden; }
+
+.insta-link::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 0%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: var(--color-overlay);
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0); }
+
+.insta-link:hover::after {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1); }
+
+.insta-link .svg-wrapper {
+  position: absolute;
+  z-index: 2;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  color: var(--color-foreground); }
+
+.insta-link:hover .svg-wrapper {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1); }
+
+.insta-link img {
+  -o-object-fit: cover;
+  object-fit: cover;
+  height: auto;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s; }
+
+.insta-link:hover > img {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1); }
+
+@media (min-width: 1600px) {
+  .insta-list {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center; } }

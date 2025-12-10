@@ -1,0 +1,302 @@
+.destination-gallery {
+  position: relative; }
+
+.destination-gallery .rating-title-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 12px; }
+
+.destination-gallery .review,
+.destination-gallery .person-time-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 5px;
+  -webkit-margin-before: 16px;
+  margin-block-start: 16px; }
+
+.destination-map .button,
+.destination-available .button,
+.destination-reviews .button,
+.destination-gallery .button {
+  --style-border-radius-buttons-primary: 8px; }
+
+.destination-gallery .button-wishlist-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 16px;
+  -webkit-margin-before: 16px;
+  margin-block-start: 16px; }
+
+.destination-gallery .wishlist-icon {
+  --color-border: rgba(0, 183, 241, 1);
+  --badge-radius: 8px;
+  --badge-padding: 6px 16px;
+  position: static;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid var(--color-border);
+  min-height: 56px;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content; }
+
+.destination-gallery .share-icon {
+  --color-border: rgba(0, 183, 241, 1);
+  --badge-radius: 8px;
+  --badge-padding: 6px 16px;
+  border: 1px solid var(--color-border);
+  min-height: 56px;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  padding: var(--badge-padding);
+  border-radius: var(--badge-radius);
+  background: var(--color-background); }
+
+.destination-gallery .share-icon svg {
+  min-width: 24px;
+  width: 24px;
+  height: 24px; }
+
+.overview-desc > .heading + .text {
+  -webkit-margin-before: 16px;
+  margin-block-start: 16px; }
+
+.facility-block {
+  --color-background: rgba(255, 255, 255, 1);
+  --color-border: rgba(0, 183, 241, 1);
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 165px;
+  min-height: 145px;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  gap: 12px;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  border-radius: 12px;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  height: auto; }
+
+.facility-block .facility-list {
+  -webkit-margin-before: 8px;
+  margin-block-start: 8px; }
+
+.facility-blocks {
+  -webkit-margin-before: 40px;
+  margin-block-start: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 16px;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+
+.facility-block.active {
+  --color-background: rgba(0, 183, 241, 1);
+  --color-foreground-heading: rgba(255, 255, 255, 1);
+  --color-foreground: rgba(255, 255, 255, 1); }
+
+.facility-block .facility-list > li + li {
+  -webkit-margin-before: 8px;
+  margin-block-start: 8px; }
+
+.destination-reviews .rating-number-wrap {
+  -webkit-margin-before: 24px;
+  margin-block-start: 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 16px; }
+
+.destination-reviews .rating-text > .heading + .text {
+  -webkit-margin-before: 8px;
+  margin-block-start: 8px; }
+
+.destination-reviews .section-headings-horizontal {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start; }
+
+.destination-reviews .user-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 960px; }
+
+.destination-reviews .user-content .text-content > .text {
+  -webkit-margin-before: 8px;
+  margin-block-start: 8px; }
+
+.destination-reviews .user-content img {
+  width: 45px;
+  height: 45px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -o-object-fit: cover;
+  object-fit: cover; }
+
+.destination-reviews .rating-with-name {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 24px; }
+
+.destination-reviews .rating-with-name > div:not(:first-child) {
+  position: relative; }
+
+.destination-reviews .rating-with-name > div:not(:first-child)::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 75%;
+  background: var(--color-border);
+  left: -12px;
+  top: 50%;
+  z-index: 2;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.destination-reviews .review-list {
+  -webkit-margin-before: 40px;
+  margin-block-start: 40px; }
+
+.destination-reviews .review-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  gap: 24px;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 24px; }
+
+.destination-reviews .review-item + .review-item {
+  -webkit-margin-before: 24px;
+  margin-block-start: 24px; }
+
+.destination-available .available-list {
+  -webkit-margin-before: 40px;
+  margin-block-start: 40px; }
+
+.destination-available .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 960px; }
+
+.destination-available .content img {
+  width: 48px;
+  height: 48px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -o-object-fit: cover;
+  object-fit: cover;
+  border-radius: 4px; }
+
+.destination-available .available-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  gap: 24px;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+
+.destination-available .available-item + .available-item {
+  -webkit-margin-before: 24px;
+  margin-block-start: 24px; }
+
+.destination-available .available-item:not(:last-child) {
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-border); }
+
+.destination-available .available-item .price-with-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-column-gap: 60px;
+  column-gap: 60px;
+  row-gap: 24px; }
+
+.destination-map .google-map {
+  -webkit-margin-before: 40px;
+  margin-block-start: 40px;
+  border-radius: 16px; }
+
+.destination-gallery .section-headings-horizontal,
+.destination-map .section-headings-horizontal {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start; }
+
+.loacatoin-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 4px;
+  -webkit-margin-before: 12px;
+  margin-block-start: 12px; }
+
+@media (max-width: 767px) {
+  .destination-gallery .wishlist-icon,
+  .destination-gallery .share-icon {
+    min-height: 48px; } }

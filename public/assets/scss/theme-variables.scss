@@ -1,0 +1,137 @@
+:root {
+  /* Typography */
+  --font-body--family: "Inter", sans-serif;
+  --font-body--style: normal;
+  --font-body--weight: 400;
+
+  --font-heading--family: "Barlow", sans-serif;
+  --font-heading--style: normal;
+  --font-heading--weight: 700;
+
+  --font-subheading--family: "Barlow", sans-serif;
+  --font-subheading--style: normal;
+  --font-subheading--weight: 400;
+
+  --font-button--family: "Barlow", sans-serif;
+  --font-button--style: normal;
+  --font-button--weight: 600;
+
+  /* h1-h6 */
+  --font-h1--size: 60px;
+  --font-h2--size: 48px;
+  --font-h3--size: 36px;
+  --font-h4--size: 24px;
+  --font-h5--size: 20px;
+  --font-h6--size: 16px;
+
+  /* header nav */
+  --font-nav-main: 16px;
+
+  /* Colors */
+  --color-background: rgba(255, 255, 255, 1);
+  --color-foreground: rgba(3, 15, 18, 0.7);
+  --color-foreground-heading: rgba(3, 15, 18, 1);
+  --color-foreground-subheading: rgba(3, 15, 18, 1);
+  --color-primary: rgba(3, 15, 18, 1);
+  --color-primary-background: rgba(255, 255, 255, 1);
+  --color-primary-hover: rgba(0, 183, 241, 1);
+  --color-primary-background-hover: rgba(255, 255, 255, 1);
+  --color-border: rgba(177, 181, 182, 1);
+  --color-border-hover: rgba(177, 181, 182, 1);
+  --color-shadow: rgba(0, 0, 0, 1);
+  --color-overlay: rgba(3, 15, 18, 0.4);
+
+  /* Buttons */
+  --font-button-size: 18px;
+  --font-button-size-mobile: 16px;
+  --style-button-height: 56px;
+  --style-button-height-mobile: 48px;
+  --style-button-slim-height: 44px;
+  --style-button-slim-height-mobile: 40px;
+  --style-cta-underline-offset: 5px;
+  --style-cta-underline-thickness: 1px;
+
+  /* Colors - Primary Button */
+  --color-primary-button-text: rgba(255, 255, 255, 1);
+  --color-primary-button-background: rgba(0, 183, 241, 1);
+  --color-primary-button-border: rgba(0, 183, 241, 1);
+  --color-primary-button-icon: rgba(0, 183, 241, 1);
+  --color-primary-button-icon-background: rgba(255, 255, 255, 1);
+
+  --color-primary-button-hover-text: rgba(255, 255, 255, 1);
+  --color-primary-button-hover-background: rgb(10, 138, 177, 1);
+  --color-primary-button-hover-border: rgb(10, 138, 177, 1);
+  --color-primary-button-hover-icon: rgba(0, 183, 241, 1);
+  --color-primary-button-hover-icon-background: rgba(255, 255, 255, 1);
+
+  /* Colors - Secondary Button */
+  --color-secondary-button-text: rgba(0, 183, 241, 1);
+  --color-secondary-button-background: rgba(255, 255, 255, 1);
+  --color-secondary-button-border: rgba(0, 183, 241, 1);
+  --color-secondary-button-icon: rgba(255, 255, 255, 1);
+  --color-secondary-button-icon-background: rgba(0, 183, 241, 1);
+
+  --color-secondary-button-hover-text: rgba(255, 255, 255, 1);
+  --color-secondary-button-hover-background: rgba(0, 183, 241, 1);
+  --color-secondary-button-hover-border: rgba(255, 255, 255, 1);
+  --color-secondary-button-hover-icon: rgba(0, 183, 241, 1);;
+  --color-secondary-button-hover-icon-background: rgba(255, 255, 255, 1);
+
+  /* Colors - Input */
+  --color-input-background: rgba(255, 255, 255, 0.3);
+  --color-input-text: rgba(3, 15, 18, 1);
+  --color-input-border: rgba(3, 15, 18, 0.6);
+  --color-input-hover-background: rgba(255, 255, 255, 0.3);
+  --color-input-hover-text: rgba(3, 15, 18, 1);
+  --color-input-hover-border: rgba(3, 15, 18, 0.6);
+
+  /* Borders */
+  --style-border-width-buttons-primary: 1.5px;
+  --style-border-width-buttons-secondary: 1.5px;
+  --style-border-radius-buttons-primary: 42px;
+  --style-border-radius-buttons-secondary: 42px;
+
+  --style-border-width-inputs: 1px;
+  --style-border-radius-inputs: 8px;
+  --style-border-width: 1px;
+
+  /* Focus */
+  --focus-outline-width: 1px;
+  --focus-outline-offset: 3px;
+
+  /* Pagination */
+  --style-pagination-border-width: 1px;
+  --pagination-item-foreground: rgba(3, 15, 18, 0.6);
+  --pagination-item-background: rgba(255, 255, 255, 1);
+  --pagination-item-border: rgba(255, 255, 255, 1);
+  --pagination-item-active-foreground: rgba(255, 255, 255, 1);
+  --pagination-item-active-background: rgba(0, 183, 241, 1);
+  --pagination-item-active-border: rgba(0, 183, 241, 1);
+
+  /* Swiper */
+  --swiper-navigation-size: 24px;
+  --swiper-pagination-bullet-width: 16px;
+  --swiper-pagination-bullet-height: 16px;
+  --swiper-navigation-color: rgba(255, 255, 255, 1);
+  --swiper-navigation-background-color: rgba(0, 183, 241, 1);
+  --swiper-navigation-hover-color: rgba(255, 255, 255, 1);
+  --swiper-navigation-hover-background-color: rgba(0, 183, 241, 1);
+  --swiper-pagination-bullet-inactive-color: rgba(217, 244, 253);
+  --swiper-pagination-color: rgba(0, 183, 241, 1);
+  --swiper-pagination-bullet-inactive-opacity: 1;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --font-h1--size: 48px;
+    --font-h2--size: 40px;
+    --font-h3--size: 28px;
+    --font-h4--size: 20px;
+    --font-h5--size: 18px;
+  }
+}
+
+.index-3 {  
+  --style-border-radius-buttons-primary: 10px;
+  --style-border-radius-buttons-secondary: 10px;
+}

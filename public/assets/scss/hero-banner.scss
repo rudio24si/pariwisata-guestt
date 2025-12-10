@@ -1,0 +1,233 @@
+.hero-has-video,
+.banner-with-tab {
+  --color-foreground: rgba(255, 255, 255, 0.7);
+  --color-foreground-heading: rgba(255, 255, 255, 1);
+}
+
+.hero-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-banner.section-padding {
+  --padding-top: 80px;
+  --padding-bottom: 80px;
+}
+
+.banner-with-tab {
+  overflow: visible;
+}
+
+.hero-banner .content > .heading + .text {
+  margin-block-start: 24px;
+}
+
+.hero-banner .content {
+  max-width: 670px;
+}
+
+.hero-has-video .content,
+.banner-with-tab .content {
+  max-width: 950px;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  text-align: center;
+  z-index: 2;
+  position: relative;
+}
+
+.hero-has-video .content > .text,
+.banner-with-tab .content > .text {
+  max-width: 586px;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+
+.hero-banner .hero-buttons {
+  margin-block-start: 40px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.hero-banner .hero-buttons > .button {
+  min-width: max-content;
+}
+
+.hero-banner .button-video {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.hero-banner .button-video:focus .button--primary,
+.hero-banner .button-video:hover .button--primary {
+  --color-primary-button-hover-border: rgba(255, 255, 255, 1);
+  outline: none;
+  box-shadow: none;
+  color: var(--color-primary-button-hover-text);
+  background-color: var(--color-primary-button-hover-background);
+  border: var(--style-border-width-buttons-primary) solid
+    var(--color-primary-button-hover-border);
+}
+
+.hero-banner .button-video .button {
+  --color-border: rgba(255, 255, 255, 1);
+  width: 40px;
+  min-height: 40px;
+  height: 40px;
+  border: 1px solid var(--color-border);
+  border-radius: 100%;
+  padding: 0;
+}
+
+.hero-banner .user-wrap {
+  margin-block-start: 80px;
+  max-width: 410px;
+}
+
+.hero-banner .image-shape {
+  position: absolute;
+  bottom: 2px;
+  left: -98px;
+}
+
+.hero-image-wrap {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: 45%;
+}
+
+.hero-image {
+  --hero-height: 100%;
+  border-radius: 457px 0 0 0;
+  overflow: hidden;
+  height: var(--hero-height);
+  max-height: var(--hero-height);
+  min-height: var(--hero-height);
+}
+
+.hero-image img {
+  height: 100%;
+  object-fit: cover;
+  object-position: left;
+}
+
+.hero-filter {
+  margin-block-start: 60px;
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+
+.hero-bg-video .content {
+  --color-foreground: rgba(255, 255, 255, 1);
+  --color-foreground-heading: rgba(255, 255, 255, 1);
+  max-width: 1090px;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+
+.hero-bg-video .media video {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 1199px) {
+  .hero-banner .image-shape {
+    --size-shape: 170px;
+    position: absolute;
+    bottom: 2px;
+    left: -15%;
+  }
+
+  .hero-banner .content {
+    max-width: 480px;
+  }
+
+  .hero-bg-video .content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 991px) {
+  .hero-banner .user-wrap {
+    margin-block-start: 60px;
+    padding: 12px 20px;
+  }
+
+  .hero-banner .image-shape {
+    --size-shape: 140px;
+    left: auto;
+    right: 10px;
+    height: auto;
+    bottom: 10px;
+  }
+
+  .hero-banner .image-pill {
+    --image-border-width: 6px;
+  }
+
+  .hero-image {
+    --hero-height: 500px;
+    border-radius: 16px;
+  }
+
+  .hero-image img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  .hero-image-wrap {
+    position: relative;
+    max-width: 100%;
+    width: 100%;
+    margin-block-start: 40px;
+  }
+
+  .hero-banner.section-padding {
+    --padding-top: 60px;
+    --padding-bottom: 60px;
+  }
+
+  .hero-banner .content {
+    max-width: 675px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-banner .user-wrap {
+    margin-block-start: 40px;
+  }
+
+  .hero-banner .hero-buttons .button {
+    padding: 16px 18px;
+  }
+
+  .hero-banner .image-shape {
+    --size-shape: 120px;
+  }
+
+  .hero-banner.section-padding {
+    --padding-top: 50px;
+    --padding-bottom: 50px;
+  }
+
+  .hero-image {
+    --hero-height: 440px;
+  }
+
+  .hero-bg-video.dynamic-840 {
+    min-height: calc(660px - var(--header-height));
+  }
+}

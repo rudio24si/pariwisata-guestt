@@ -1,0 +1,90 @@
+.marquee {
+  position: relative;
+  width: 100%;
+  min-height: 20vh;
+  overflow: hidden;
+  background: #fff;
+  border-top: 3px solid #e9f7fe;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+/* The moving "track" that slides left to right */
+.marquee__track {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  white-space: nowrap;
+  -webkit-animation: marquee-scroll 20s linear infinite;
+  animation: marquee-scroll 20s linear infinite; }
+
+/* Animation: moves the track smoothly across the screen */
+@-webkit-keyframes marquee-scroll {
+  from {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); }
+  to {
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%); } }
+@keyframes marquee-scroll {
+  from {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); }
+  to {
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%); } }
+
+/* Each block of repeated content (we duplicate it in HTML) */
+.marquee__content {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  /* Prevents shrinking */ }
+
+/* The list and items inside the marquee */
+.marquee__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+/* Base style for all items */
+.marquee__item {
+  padding: 0 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+
+/* Image-specific item */
+.marquee__item--image {
+  width: 8rem; }
+
+/* Image formatting */
+.marquee__item--image img {
+  width: 100%;
+  height: auto;
+  display: block; }
+
+/* Text item formatting */
+.marquee__item--text h3 {
+  font-size: 2rem;
+  margin: 0;
+  white-space: nowrap; }

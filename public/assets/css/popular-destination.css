@@ -1,0 +1,126 @@
+.popular-destination .section-headings-left {
+  max-width: 730px; }
+
+.popular-destination .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  gap: 24px;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-margin-before: 24px;
+  margin-block-start: 24px; }
+
+.popular-destination .destination-info > .heading + .text {
+  -webkit-margin-before: 6px;
+  margin-block-start: 6px; }
+
+.popular-destination .content .button {
+  border-radius: 100%;
+  min-width: 40px;
+  width: 40px;
+  min-height: 40px;
+  padding: 0;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg); }
+
+.popular-destination .popular-item-wrap:focus .button--primary,
+.popular-destination .popular-item-wrap:hover .button--primary,
+.popular-destination .popular-item-wrap:focus .button--secondary,
+.popular-destination .popular-item-wrap:hover .button--secondary {
+  color: var(--color-primary-button-hover-text);
+  background-color: var(--color-primary-hover);
+  border-color: transparent;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg); }
+
+.popular-destination .popular-item-wrap:hover .destination-info > .heading {
+  color: var(--color-primary-hover); }
+
+.popular-destination .border-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-decoration: none; }
+
+.destination-slider {
+  display: block; }
+
+.destination-slider .image-pill {
+  --image-outline-radius: 110px;
+  --image-outline-width: 0;
+  --image-outline-color: transparent; }
+
+.destination-slide .title {
+  text-align: center;
+  -webkit-margin-before: 16px;
+  margin-block-start: 16px; }
+
+.destination-slide:hover .title {
+  color: var(--color-primary-hover); }
+
+.destination-slide img {
+  -o-object-fit: cover;
+  object-fit: cover;
+  height: auto; }
+
+.destination-slide .number {
+  text-align: center;
+  -webkit-margin-before: 8px;
+  margin-block-start: 8px; }
+
+.popular-item-horizontal .image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 16px; }
+
+.popular-item-horizontal .image img {
+  min-width: 70px;
+  width: 70px;
+  height: 70px;
+  border-radius: 6px;
+  -o-object-fit: cover;
+  object-fit: cover; }
+
+.popular-item-horizontal .popular-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  gap: 24px;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%; }
+
+.popular-item-horizontal.border-wrapper {
+  --color-background: transparent;
+  --color-border: rgba(177, 181, 182, 1);
+  --border-padding: 10px;
+  border-radius: 10px; }
+
+.popular-item-horizontal .content .button {
+  min-width: 30px;
+  width: 30px;
+  min-height: 30px; }
+
+.text-with-flag > .text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 4px; }

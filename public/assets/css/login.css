@@ -1,0 +1,43 @@
+.login-page .booking-login {
+  max-width: 600px;
+  -webkit-margin-start: auto;
+  margin-inline-start: auto;
+  -webkit-margin-end: auto;
+  margin-inline-end: auto;
+  padding: 32px; }
+
+.login-page .booking-login > .button,
+.login-form {
+  -webkit-margin-before: 24px;
+  margin-block-start: 24px; }
+
+.login-page .checkbox-label {
+  --color-border: rgba(0, 183, 241, 1);
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer; }
+
+.forget-password-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 24px;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+
+.booking-login > .heading + .text {
+  -webkit-margin-before: 16px;
+  margin-block-start: 16px; }
+
+@media (max-width: 767px) {
+  .login-page .booking-login {
+    padding: 24px 16px; } }

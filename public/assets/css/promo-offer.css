@@ -1,0 +1,230 @@
+.promo-offer {
+  --color-foreground: rgba(255, 255, 255, 1);
+  --color-foreground-heading: rgba(255, 255, 255, 1);
+  position: relative; }
+
+.promo-offer .content {
+  max-width: 60%;
+  width: 570px;
+  -webkit-padding-before: 100px;
+  padding-block-start: 100px;
+  -webkit-padding-after: 100px;
+  padding-block-end: 100px; }
+
+.promo-offer .content > .heading + .text {
+  -webkit-margin-before: 24px;
+  margin-block-start: 24px; }
+
+.promo-offer .content > .button {
+  -webkit-margin-before: 30px;
+  margin-block-start: 30px; }
+
+.promo-offer .image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  min-width: 40%; }
+
+.image-inner {
+  height: 100%;
+  position: relative; }
+
+.promo-offer .image img {
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover; }
+
+.promo-offer .offer .badge {
+  --color-background: rgba(0, 183, 241, 1);
+  width: 210px;
+  height: 210px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background: var(--color-background);
+  border-radius: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 24px 32px;
+  position: static;
+  gap: 0; }
+
+.promo-offer .offer .badge span:last-child {
+  width: 100%;
+  text-align: end; }
+
+.promo-offer .dashed-border {
+  --color-border: rgba(255, 255, 255, 1);
+  --color-background: rgba(255, 255, 255, 0.3);
+  border-radius: 100%;
+  background: var(--color-background);
+  position: relative;
+  z-index: 2;
+  -webkit-backdrop-filter: blur(34px);
+  backdrop-filter: blur(34px);
+  margin: 0; }
+
+.promo-offer .offer {
+  position: absolute;
+  bottom: 40px;
+  left: -105px; }
+
+.promo-offer-2 {
+  overflow: hidden; }
+
+.promo-offer-2 .content-wrapper {
+  --color-background: rgba(230, 248, 254, 1);
+  background: var(--color-background);
+  -webkit-padding-start: 70px;
+  padding-inline-start: 70px;
+  -webkit-padding-end: 160px;
+  padding-inline-end: 160px; }
+
+.promo-offer-2 .content-wrapper > .row {
+  -webkit-margin-before: 60px;
+  margin-block-start: 60px; }
+
+.promo-offer-2 .media-wrapper {
+  position: relative; }
+
+.promo-offer-2 > .row {
+  --bs-gutter-x: 0; }
+
+.promo-offer-2 .absolute-images {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 40px; }
+
+.promo-offer-2 .image-round {
+  --image-border-width: 4px; }
+
+.promo-offer-2 .image-top {
+  margin-top: -18%; }
+
+.promo-offer-2 .image-right,
+.promo-offer-2 .image-left {
+  position: absolute;
+  top: 14%;
+  left: -12%;
+  width: 191px;
+  height: 191px; }
+
+.promo-offer-2 .image-right {
+  left: auto;
+  right: -12%;
+  width: 191px;
+  height: 191px; }
+
+.promo-offer-2 .media-content {
+  --color-foreground-heading: rgba(255, 255, 255, 1);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 55%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  left: auto; }
+
+.promo-offer-2 .media-content > .heading + .heading {
+  --color-foreground-heading: rgba(0, 183, 241, 1);
+  -webkit-margin-before: 5px;
+  margin-block-start: 5px; }
+
+.promo-offer-2 .media-content > .button {
+  --color-primary-button-text: rgba(0, 183, 241, 1);
+  --color-primary-button-background: rgba(255, 255, 255, 1);
+  --color-primary-button-border: rgba(255, 255, 255, 1);
+  -webkit-margin-before: 30px;
+  margin-block-start: 30px; }
+
+@media (min-width: 2500px) {
+  .promo-offer-2 .image-top {
+    margin-top: -10%; }
+  .promo-offer-2 .image-right,
+  .promo-offer-2 .image-left {
+    position: absolute;
+    top: 8%;
+    left: -6%; }
+  .promo-offer-2 .image-right {
+    left: auto;
+    right: -6%; } }
+
+@media (max-width: 1366px) {
+  .promo-offer .offer {
+    left: -90px;
+    bottom: 20px; }
+  .promo-offer .offer .badge {
+    width: 180px;
+    height: 180px; }
+  .promo-offer .content {
+    max-width: 500px; }
+  .promo-offer-2 .image-top {
+    margin-top: -28%;
+    width: 279px;
+    height: 279px; } }
+
+@media (max-width: 1199px) {
+  .promo-offer .image {
+    max-width: 40%; } }
+
+@media (max-width: 991px) {
+  .promo-offer .content {
+    max-width: 100%;
+    width: 100%;
+    -webkit-padding-before: 24px;
+    padding-block-start: 24px;
+    -webkit-padding-after: 24px;
+    padding-block-end: 24px;
+    position: relative; }
+  .promo-offer .image {
+    max-height: 450px;
+    height: 450px;
+    position: static;
+    min-width: 100%; }
+  .promo-offer .offer {
+    bottom: 0;
+    left: auto;
+    right: 0; } }
+
+@media (max-width: 767px) {
+  .promo-offer .offer {
+    right: 0; }
+  .promo-offer .offer .badge {
+    width: 140px;
+    height: 140px;
+    padding: 16px 16px; }
+  .promo-offer .image {
+    max-height: 380px;
+    height: 380px; } }

@@ -1,0 +1,80 @@
+.pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+
+.pagintaion-list {
+  --color-background: rgba(230, 248, 254, 1);
+  --margin-top: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  gap: 10px;
+  -webkit-margin-before: var(--margin-top);
+  margin-block-start: var(--margin-top);
+  background: var(--color-background);
+  padding: 10px;
+  border-radius: 5px; }
+
+.pagination-left {
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start; }
+
+.pagination-link {
+  --size: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 18px;
+  color: var(--pagination-item-foreground);
+  background-color: var(--pagination-item-background);
+  border: var(--style-pagination-border-width) solid var(--pagination-item-border);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 4px;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s; }
+
+.pagination-link:not([aria-disabled]):focus,
+.pagination-link:not([aria-disabled]):hover,
+.pagination-link.active {
+  color: var(--pagination-item-active-foreground);
+  background-color: var(--pagination-item-active-background);
+  border-color: var(--pagination-item-active-border); }
+
+.pagination-button svg {
+  min-width: 24px;
+  width: 24px;
+  height: 24px; }
+
+.pagination-button .btn-left svg {
+  min-width: 16px;
+  width: 16px;
+  height: 16px; }
+
+@media (max-width: 767px) {
+  .pagination-link {
+    --size: 32px; } }
