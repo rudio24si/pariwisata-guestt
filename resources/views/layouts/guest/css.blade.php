@@ -22,8 +22,11 @@
     rel="stylesheet">
 
 <!-- all css -->
-<link rel="stylesheet" href="assets/css/vendor.css">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="{{ asset('assets/css/vendor.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
+<!-- ICON -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <style>
     .user-dropdown {
         position: relative;

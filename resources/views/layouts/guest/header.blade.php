@@ -4,14 +4,14 @@
         <div class="container">
             <div class="header-grid">
                 <a class="header-logo" href="index.html" aria-label="Hawaa">
-                    <img src="assets/img/logo-white.png" alt="Hawaa Logo" width="212" height="52">
+                    <img src="assets/img/logo-pg.png" alt="Hawaa Logo" width="212" height="52">
                 </a>
                 <drawer-menu>
                     <nav class="header-nav drawer-menu">
                         <div class="drawer-menu-top">
                             <div class="d-lg-none header-nav-headings">
                                 <a class="header-logo" href="/" aria-label="Hawaa">
-                                    <img src="assets/img/logo.png" alt="Hawaa Logo" width="336" height="52"
+                                    <img src="{{ asset('assets/img/logo.png') }}" alt="Hawaa Logo" width="336" height="52"
                                         loading="lazy">
                                 </a>
                                 <drawer-opener class="svg-wrapper menu-close" data-drawer=".drawer-menu">
@@ -40,7 +40,7 @@
                                     <div class="menu-absolute header-submenu submenu-color radius4">
                                         <ul class="list-unstyled">
                                             <li class="nav-item">
-                                                <a class="menu-link" href="index.html">Home 1</a>
+                                                <a class="menu-link" href="{{route('warga.index')}}">Warga</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="menu-link" href="index-2.html">Home 2</a>

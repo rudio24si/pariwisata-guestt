@@ -2,7 +2,7 @@
 <html lang="en" class="no-js">
 
 <head>
-    <title>Hawaa Creative Travelling Template</title>
+    <title>Pariwisata RUDIO</title>
     @include('layouts.guest.css')
 </head>
 
