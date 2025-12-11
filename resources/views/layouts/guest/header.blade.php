@@ -46,7 +46,7 @@
                                                 <a class="menu-link" href="{{route('destinasi-wisata.index')}}">Destinasi Wisata</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="menu-link" href="index-3.html">Home 3</a>
+                                                <a class="menu-link" href="{{route('homestay.index')}}">Homestay</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="menu-link" href="index-4.html">Home 4</a>
