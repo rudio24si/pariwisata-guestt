@@ -31,10 +31,14 @@
                     <!-- Avatar / Status Side -->
                     <div class="col-md-4 bg-light p-5 text-center border-end">
                         <div class="mb-4">
+                            <div class="avatar-circle mx-auto mb-3">
+                                @if($homestay->status == 'aktif')
+                                    <i class="bi bi-house-check text-success" style="font-size: 5rem;"></i>
+                                @else
+                                    <i class="bi bi-house-x text-danger" style="font-size: 5rem;"></i>
+                                @endif
+                            </div>
                             <h3 class="mb-1">{{ $homestay->nama }}</h3>
-                            <span class="badge bg-{{ $homestay->status == 'aktif' ? 'success' : 'danger' }} fs-6">
-                                {{ strtoupper($homestay->status) }}
-                            </span>
                         </div>
 
                         <!-- Harga per Malam -->

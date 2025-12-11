@@ -28,7 +28,7 @@
                             </div>
                             <ul class="header-menu list-unstyled">
                                 <li class="nav-item">
-                                    <a class="menu-link menu-link-main menu-accrodion" href="index.html">
+                                    <a class="menu-link menu-link-main menu-accrodion" href="/">
                                         Home
                                         <div class="svg-wrapper">
                                             <svg viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +49,7 @@
                                                 <a class="menu-link" href="{{route('homestay.index')}}">Homestay</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="menu-link" href="index-4.html">Home 4</a>
+                                                <a class="menu-link" href="{{route('kamar-homestay.index')}}">Kamar Homestay</a>
                                             </li>
                                         </ul>
                                     </div>

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WargaController;
 use App\Http\Controllers\DestinasiWisataController;
 use App\Http\Controllers\HomestayController;
+use App\Http\Controllers\KamarHomestayController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,3 +22,4 @@ Route::post('/register', [AuthController::class, 'registerPost'])->name('registe
 Route::resource('warga', WargaController::class);
 Route::resource('destinasi-wisata', DestinasiWisataController::class);
 Route::resource('homestay', HomestayController::class);
+Route::resource('kamar-homestay', KamarHomestayController::class);
