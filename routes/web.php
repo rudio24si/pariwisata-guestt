@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WargaController;
+use App\Http\Controllers\DestinasiWisataController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,3 +18,4 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'registerPost'])->name('register.post');
 
 Route::resource('warga', WargaController::class);
+Route::resource('destinasi-wisata', DestinasiWisataController::class);

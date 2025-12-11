@@ -3,8 +3,8 @@
     <header class="header-1">
         <div class="container">
             <div class="header-grid">
-                <a class="header-logo" href="index.html" aria-label="Hawaa">
-                    <img src="assets/img/logo-pg.png" alt="Hawaa Logo" width="212" height="52">
+                <a class="header-logo" href="/" aria-label="Hawaa">
+                    <img src="{{ asset('assets/img/logo-pg.png') }}" alt="Hawaa Logo" width="212" height="52">
                 </a>
                 <drawer-menu>
                     <nav class="header-nav drawer-menu">
@@ -43,7 +43,7 @@
                                                 <a class="menu-link" href="{{route('warga.index')}}">Warga</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="menu-link" href="index-2.html">Home 2</a>
+                                                <a class="menu-link" href="{{route('destinasi-wisata.index')}}">Destinasi Wisata</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="menu-link" href="index-3.html">Home 3</a>

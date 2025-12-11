@@ -13,6 +13,7 @@
     content="A versatile template designed for travel agencies, tour operators, and adventure websites.">
 <meta name="description"
     content="Hawaa is a creative travelling template designed for travel agencies, tour operators, and adventure websites.">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <!-- fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +26,7 @@
 <link rel="stylesheet" href="{{ asset('assets/css/vendor.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
-<!-- ICON -->
+<!-- BOOTSTRAP -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <style>
     .user-dropdown {
