@@ -8,9 +8,10 @@ use App\Http\Controllers\KamarHomestayController;
 use App\Http\Controllers\BookingHomestayController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+// Route::get('/', function () {
+//     return view('dashboard');
+// });
+Route::get('/', [BookingHomestayController::class, 'index'])->name('dashboard');
 
 // Authentication routes
 Route::get('/auth', [AuthController::class, 'index'])->name('login');

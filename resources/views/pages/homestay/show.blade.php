@@ -32,7 +32,7 @@
                     <div class="col-md-4 bg-light p-5 text-center border-end">
                         <div class="mb-4">
                             <div class="avatar-circle mx-auto mb-3">
-                                @if($homestay->status == 'aktif')
+                                @if ($homestay->status == 'aktif')
                                     <i class="bi bi-house-check text-success" style="font-size: 5rem;"></i>
                                 @else
                                     <i class="bi bi-house-x text-danger" style="font-size: 5rem;"></i>
@@ -44,7 +44,8 @@
                         <!-- Harga per Malam -->
                         <div class="bg-white rounded-3 p-4 mb-4 shadow-sm">
                             <div class="text-muted small mb-1">HARGA PER MALAM</div>
-                            <h2 class="text-success mb-0">Rp {{ number_format($homestay->harga_per_malam, 0, ',', '.') }}</h2>
+                            <h2 class="text-success mb-0">Rp {{ number_format($homestay->harga_per_malam, 0, ',', '.') }}
+                            </h2>
                         </div>
 
                         <!-- Quick Actions -->
@@ -52,7 +53,7 @@
                             <a href="#" class="btn btn-success">
                                 <i class="bi bi-calendar-check me-2"></i> Pesan Sekarang
                             </a>
-                            @if($homestay->pemilik && $homestay->pemilik->telp)
+                            @if ($homestay->pemilik && $homestay->pemilik->telp)
                                 <a href="tel:{{ $homestay->pemilik->telp }}" class="btn btn-outline-primary">
                                     <i class="bi bi-telephone me-2"></i> Hubungi Pemilik
                                 </a>
@@ -75,7 +76,8 @@
                                     </div>
                                     <div class="list-group-item d-flex justify-content-between px-0">
                                         <span class="fw-medium">RT/RW</span>
-                                        <span class="text-muted">RT {{ $homestay->rt ?? '-' }} / RW {{ $homestay->rw ?? '-' }}</span>
+                                        <span class="text-muted">RT {{ $homestay->rt ?? '-' }} / RW
+                                            {{ $homestay->rw ?? '-' }}</span>
                                     </div>
                                     <div class="list-group-item px-0">
                                         <span class="fw-medium d-block mb-1">Alamat Lengkap</span>
@@ -89,7 +91,7 @@
                                 <h5 class="text-success mb-3 border-bottom pb-2">
                                     <i class="bi bi-person-badge me-2"></i>Pemilik
                                 </h5>
-                                @if($homestay->pemilik)
+                                @if ($homestay->pemilik)
                                     <div class="card border-success border-2">
                                         <div class="card-body">
                                             <div class="d-flex align-items-center mb-3">
@@ -103,15 +105,15 @@
                                                     </p>
                                                 </div>
                                             </div>
-                                            @if($homestay->pemilik->telp || $homestay->pemilik->email)
+                                            @if ($homestay->pemilik->telp || $homestay->pemilik->email)
                                                 <div class="small">
-                                                    @if($homestay->pemilik->telp)
+                                                    @if ($homestay->pemilik->telp)
                                                         <div class="d-flex align-items-center mb-1">
                                                             <i class="bi bi-telephone text-success me-2"></i>
                                                             {{ $homestay->pemilik->telp }}
                                                         </div>
                                                     @endif
-                                                    @if($homestay->pemilik->email)
+                                                    @if ($homestay->pemilik->email)
                                                         <div class="d-flex align-items-center">
                                                             <i class="bi bi-envelope text-success me-2"></i>
                                                             {{ $homestay->pemilik->email }}
@@ -135,12 +137,13 @@
                                     <i class="bi bi-star me-2"></i>Fasilitas
                                 </h5>
                                 @php
-                                    $fasilitas = json_decode($homestay->fasilitas_json, true) ?? [];
+                                    $fasilitas = $homestay->fasilitas_json;
+                                    echo implode(', ', $fasilitas ?? []);
                                 @endphp
 
-                                @if(count($fasilitas) > 0)
+                                @if (count($fasilitas) > 0)
                                     <div class="row g-2">
-                                        @foreach($fasilitas as $fasilitasItem)
+                                        @foreach ($fasilitas as $fasilitasItem)
                                             <div class="col-auto">
                                                 <div class="card bg-warning bg-opacity-10 border-warning border">
                                                     <div class="card-body py-2 px-3">
@@ -201,7 +204,8 @@
                                         </div>
                                         <h4 class="text-purple mb-2">Siap Dipesan</h4>
                                         <p class="text-muted small mb-0">
-                                            Status: <span class="fw-bold">{{ $homestay->status == 'aktif' ? 'Tersedia' : 'Tidak Tersedia' }}</span>
+                                            Status: <span
+                                                class="fw-bold">{{ $homestay->status == 'aktif' ? 'Tersedia' : 'Tidak Tersedia' }}</span>
                                         </p>
                                         <button class="btn btn-purple mt-3">
                                             <i class="bi bi-calendar-range me-2"></i> Cek Jadwal
@@ -223,8 +227,8 @@
                         </span>
                     </div>
                     <div class="btn-group">
-                        <form action="{{ route('homestay.destroy', $homestay->homestay_id) }}" method="POST" class="d-inline"
-                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus homestay ini?')">
+                        <form action="{{ route('homestay.destroy', $homestay->homestay_id) }}" method="POST"
+                            class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus homestay ini?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">
@@ -319,8 +323,8 @@
         // Share via WhatsApp
         function shareViaWhatsApp() {
             const text = `Check out this homestay: ${encodeURIComponent("{{ $homestay->nama }}")}\n` +
-                        `Price: Rp ${encodeURIComponent("{{ number_format($homestay->harga_per_malam, 0, ',', '.') }}")}/night\n` +
-                        `Address: ${encodeURIComponent("{{ $homestay->alamat }}")}`;
+                `Price: Rp ${encodeURIComponent("{{ number_format($homestay->harga_per_malam, 0, ',', '.') }}")}/night\n` +
+                `Address: ${encodeURIComponent("{{ $homestay->alamat }}")}`;
 
             const url = `https://wa.me/?text=${text}`;
             window.open(url, '_blank');
@@ -338,7 +342,7 @@
             });
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             // WhatsApp share button
             const whatsappBtn = document.querySelector('.btn-success.btn-sm:last-child');
             if (whatsappBtn) {
