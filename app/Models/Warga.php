@@ -22,17 +22,20 @@ class Warga extends Model
         'email'
     ];
 
-    public function scopeSearch(Builder $query, $keyword)
+    // Di file Warga.php
+    public function scopeSearch($query, $request, array $columns)
     {
-        return $query->where(function ($q) use ($keyword) {
-            $q->where('nama', 'like', '%' . $keyword . '%')
-                ->orWhere('telp', 'like', '%' . $keyword . '%');
-        });
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request, $columns) {
+                foreach ($columns as $column) {
+                    // Gunakan orWhere agar mencari di semua kolom yang ditentukan
+                    $q->orWhere($column, 'LIKE', '%' . $request->search . '%');
+                }
+            });
+        }
+        return $query;
     }
 
-    /**
-     * Scope untuk filter
-     */
     public function scopeFilter(Builder $query, $request, array $filterableColumns)
     {
         foreach ($filterableColumns as $column) {

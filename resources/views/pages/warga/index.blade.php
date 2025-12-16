@@ -9,6 +9,42 @@
                 <div class="section-headings headings-width text-center">
                     <h2 class="heading text-50" data-aos="fade-up">Warga</h2>
                     <a href="{{ route('warga.create') }}" class="btn btn-primary mt-3" data-aos="fade-up">Tambah Warga</a>
+
+                    <div class="mt-4" data-aos="fade-up">
+                        <form method="GET" action="{{ route('warga.index') }}">
+                            <div class="row justify-content-center g-2">
+                                <div class="col-md-2">
+                                    <select name="jenis_kelamin" class="form-select border-primary shadow-none"
+                                        onchange="this.form.submit()">
+                                        <option value="">Semua</option>
+                                        <option value="L" {{ request('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki
+                                        </option>
+                                        <option value="P" {{ request('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <input type="text" name="search" class="form-control border-primary shadow-none"
+                                            value="{{ request('search') }}" placeholder="Search">
+
+                                        {{-- Tombol Clear (Hanya muncul jika ada search/filter) --}}
+                                        @if(request('search') || request('jenis_kelamin'))
+                                            <a href="{{ route('warga.index') }}" class="btn btn-outline-danger"
+                                                title="Clear Search">
+                                                <i class="bi bi-x-circle"></i>
+                                            </a>
+                                        @endif
+
+                                        <button type="submit" class="input-group-text btn btn-primary">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="section-content" data-aos="fade-up">
                     <destination-slider class="destination-slider">
@@ -17,7 +53,7 @@
                                 <!-- ISI DATA WARGA DI BAAWAHH INII -->
                                 @foreach($warga as $w)
                                     <div class="swiper-slide">
-                                        <a href="{{route('warga.show',$w->warga_id)}}" class="destination-slide no-underline"
+                                        <a href="{{route('warga.show', $w->warga_id)}}" class="destination-slide no-underline"
                                             aria-label="popular destination">
                                             <div class="image-shape image-pill">
                                                 <img src="assets/img/destination/sm-1.jpg" width="336" height="474"
