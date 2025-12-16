@@ -40,6 +40,9 @@
                                     <div class="menu-absolute header-submenu submenu-color radius4">
                                         <ul class="list-unstyled">
                                             <li class="nav-item">
+                                                <a class="menu-link" href="{{route('user.index')}}">User</a>
+                                            </li>
+                                            <li class="nav-item">
                                                 <a class="menu-link" href="{{route('warga.index')}}">Warga</a>
                                             </li>
                                             <li class="nav-item">

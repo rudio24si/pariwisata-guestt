@@ -29,4 +29,9 @@ class DestinasiWisata extends Model
         'jam_buka' => 'datetime:H:i',
         'jam_tutup' => 'datetime:H:i',
     ];
+
+    public function ulasan()
+    {
+        return $this->hasMany(UlasanWisata::class, 'destinasi_id', 'destinasi_id');
+    }
 }

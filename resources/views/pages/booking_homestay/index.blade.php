@@ -22,11 +22,11 @@
                                     <div class="col-lg-4 col-md-6 col-12" data-aos="fade-up">
                                         <div class="product-card radius16 hover-on-image">
                                             <div class="image">
-                                                <img src="assets/img/product/1.jpg" width="734" height="534"
-                                                    loading="lazy" alt="Product Image">
+                                                <img src="assets/img/product/1.jpg" width="734" height="534" loading="lazy"
+                                                    alt="Product Image">
                                                 <div class="review text text-14">
-                                                    <svg class="icon-12" width="12" height="12" viewBox="0 0 12 12"
-                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg class="icon-12" width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
                                                         <g clip-path="url(#clip0_58_3674)">
                                                             <path
                                                                 d="M11.4485 4.58548C11.3733 4.35305 11.1672 4.18797 10.9233 4.16599L7.6103 3.86517L6.30026 0.798893C6.20367 0.574174 5.98368 0.428711 5.73925 0.428711C5.49483 0.428711 5.27484 0.574174 5.17825 0.799418L3.86821 3.86517L0.554701 4.16599C0.311242 4.1885 0.105615 4.35305 0.0300369 4.58548C-0.0455407 4.8179 0.0242569 5.07283 0.208428 5.23354L2.71265 7.42975L1.97421 10.6826C1.92018 10.9217 2.01301 11.169 2.21145 11.3124C2.31812 11.3895 2.44292 11.4287 2.56876 11.4287C2.67727 11.4287 2.7849 11.3994 2.88149 11.3416L5.73925 9.63368L8.59597 11.3416C8.80501 11.4674 9.06852 11.4559 9.26653 11.3124C9.46506 11.1685 9.55781 10.9212 9.50377 10.6826L8.76534 7.42975L11.2696 5.23397C11.4537 5.07283 11.524 4.81834 11.4485 4.58548Z"
@@ -72,16 +72,20 @@
                                                                 </g>
                                                                 <defs>
                                                                     <clipPath>
-                                                                        <rect width="16" height="16"
-                                                                            fill="currentColor" />
+                                                                        <rect width="16" height="16" fill="currentColor" />
                                                                     </clipPath>
                                                                 </defs>
                                                             </svg>
                                                         </div>
                                                         @php
-                                                            $fasilitas = json_decode($k->fasilitas_json, true);
-                                                            echo implode(', ', $fasilitas ?? []);
+                                                            // Memastikan $fasilitas selalu menjadi array
+                                                            $fasilitas = $k->fasilitas_json;
+                                                            if (is_string($fasilitas)) {
+                                                                $fasilitas = json_decode($fasilitas, true);
+                                                            }
                                                         @endphp
+                                                        {{-- Sekarang gunakan implode dengan aman --}}
+                                                        {{ is_array($fasilitas) ? implode(', ', $fasilitas) : 'Tidak ada fasilitas' }}
                                                     </li>
                                                     <li class="person-time-item text text-16">
                                                         <div class="svg-wrapper icon-16">

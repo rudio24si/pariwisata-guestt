@@ -12,7 +12,7 @@ class DestinasiWisataController extends Controller
      */
     public function index()
     {
-        $destinasi = DestinasiWisata::all();
+        $destinasi = DestinasiWisata::with('ulasan')->get();
         return view('pages.destinasi-wisata.index', compact('destinasi'));
     }
 

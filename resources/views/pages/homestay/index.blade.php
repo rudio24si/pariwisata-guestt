@@ -40,9 +40,14 @@
                                                                 fill="currentColor" />
                                                         </svg>
                                                         @php
+                                                            // Memastikan $fasilitas selalu menjadi array
                                                             $fasilitas = $h->fasilitas_json;
-                                                            echo implode(', ', $fasilitas ?? []);
+                                                            if (is_string($fasilitas)) {
+                                                                $fasilitas = json_decode($fasilitas, true);
+                                                            }
                                                         @endphp
+                                                        {{-- Sekarang gunakan implode dengan aman --}}
+                                                        {{ is_array($fasilitas) ? implode(', ', $fasilitas) : 'Tidak ada fasilitas' }}
                                                     </div>
                                                 </div>
                                             </div>
