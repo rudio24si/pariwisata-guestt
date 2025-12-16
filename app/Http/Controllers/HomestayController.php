@@ -11,9 +11,30 @@ class HomestayController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $homestays = Homestay::all();
+        $query = Homestay::query();
+
+        // 1. Fitur Search Berdasarkan Nama
+        if ($request->filled('search')) {
+            $query->where('nama', 'LIKE', '%' . $request->search . '%');
+        }
+
+        // 2. Fitur Filter Berdasarkan Harga
+        if ($request->filled('sort')) {
+            if ($request->sort == 'termurah') {
+                $query->orderBy('harga_per_malam', 'asc');
+            } elseif ($request->sort == 'termahal') {
+                $query->orderBy('harga_per_malam', 'desc');
+            }
+        } else {
+            $query->latest(); // Default urutan terbaru jika tidak ada filter
+        }
+
+        // 3. Fitur Pagination (Misal: 6 data per halaman)
+        // withQueryString() penting agar parameter search & sort tidak hilang saat pindah halaman
+        $homestays = $query->paginate(6)->withQueryString();
+
         return view('pages.homestay.index', compact('homestays'));
     }
 
