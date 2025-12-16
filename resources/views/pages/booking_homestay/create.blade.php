@@ -78,14 +78,16 @@
                                     <label for="metode_bayar" class="form-label fw-medium">Metode Pembayaran</label>
                                     <select name="metode_bayar" id="metode_bayar" class="form-select" required>
                                         <option value="" selected disabled>-- Pilih Metode Pembayaran --</option>
+
                                         <option value="transfer">
-                                            <i class="bi bi-bank me-1"></i> Transfer Bank
+                                            Transfer Bank
                                         </option>
                                         <option value="qris">
-                                            <i class="bi bi-qr-code me-1"></i> QRIS
+                                            QRIS
                                         </option>
-                                        <option value="cash">
-                                            <i class="bi bi-cash-coin me-1"></i> Cash
+                                        <option value="tunai"> Tunai (Cash)
+                                        </option>
+                                        <option value="kredit"> Kredit
                                         </option>
                                     </select>
                                 </div>

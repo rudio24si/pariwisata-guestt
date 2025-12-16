@@ -37,6 +37,14 @@
                             @endif
                         </div>
                     </div>
+
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show mt-3" data-aos="fade-up" role="alert">
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="section-content mt-5" data-aos="fade-up">
@@ -48,8 +56,13 @@
                                         <a href="{{route('user.show', $user->id)}}" class="destination-slide no-underline"
                                             aria-label="user profile">
                                             <div class="image-shape image-pill">
-                                                <img src="{{ asset('assets/img/destination/sm-1.jpg') }}" width="336"
-                                                    height="474" loading="lazy" alt="User Image">
+                                                @if($user->profile_picture)
+                                                    <img src="{{ Storage::url($user->profile_picture) }}" alt="Profile Picture"
+                                                        width="336" height="474" loading="lazy" alt="User Image">
+                                                @else
+                                                    <img src="{{ asset('assets/img/destination/sm-1.jpg') }}" width="336"
+                                                        height="474" loading="lazy" alt="User Image">
+                                                @endif
                                             </div>
                                             <div class="title heading text-20">{{ $user->name }}</div>
                                             <div class="number text text-16">{{ $user->email }}</div>
