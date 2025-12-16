@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $searchableColumns = ['name', 'email'];
+
+        $users = User::search($request, $searchableColumns)
+            ->paginate(8)
+            ->withQueryString();
         return view('pages.user.index', compact('users'));
     }
 
@@ -65,7 +69,7 @@ class UserController extends Controller
         $user->update($data);
         return redirect()->route('user.index');
     }
-    
+
     public function show(User $user)
     {
         return view('pages.user.show', compact('user'));
