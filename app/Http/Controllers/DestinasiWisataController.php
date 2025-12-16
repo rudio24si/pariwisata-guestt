@@ -10,9 +10,28 @@ class DestinasiWisataController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $destinasi = DestinasiWisata::with('ulasan')->get();
+        $query = DestinasiWisata::with('ulasan');
+
+        // Fitur Search berdasarkan Nama
+        if ($request->filled('search')) {
+            $query->where('nama', 'LIKE', '%' . $request->search . '%');
+        }
+
+        // Fitur Filter berdasarkan Harga
+        if ($request->filled('sort')) {
+            if ($request->sort == 'termurah') {
+                $query->orderBy('tiket', 'asc');
+            } elseif ($request->sort == 'termahal') {
+                $query->orderBy('tiket', 'desc');
+            }
+        } else {
+            $query->latest(); // Default urutan terbaru
+        }
+
+        $destinasi = $query->paginate(6)->withQueryString();
+
         return view('pages.destinasi-wisata.index', compact('destinasi'));
     }
 

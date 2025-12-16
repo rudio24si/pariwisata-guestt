@@ -8,9 +8,41 @@
             <div class="container mb-5">
                 <div class="section-headings headings-width text-center">
                     <h2 class="heading text-50" data-aos="fade-up">Destinasi Wisata</h2>
-                    <div class="text text-18" data-aos="fade-up" data-aos-delay="50">Inforasi lengkap destinasi wisata</div>
-                    <a href="{{ route('destinasi-wisata.create') }}" class="btn btn-primary mt-3" data-aos="fade-up"
-                        data-aos-delay="50">Tambah Destinasi Wisata</a>
+                    <div class="text text-18" data-aos="fade-up" data-aos-delay="50">Informasi lengkap destinasi wisata</div>
+                    
+                    <div class="mt-4 mb-5" data-aos="fade-up" data-aos-delay="100">
+                        <form method="GET" action="{{ route('destinasi-wisata.index') }}">
+                            <div class="row justify-content-center g-2">
+                                <div class="col-md-3">
+                                    <select name="sort" class="form-select border-primary shadow-none" onchange="this.form.submit()">
+                                        <option value="">Urutkan Harga</option>
+                                        <option value="termurah" {{ request('sort') == 'termurah' ? 'selected' : '' }}>Harga Termurah</option>
+                                        <option value="termahal" {{ request('sort') == 'termahal' ? 'selected' : '' }}>Harga Tertinggi</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-5">
+                                    <div class="input-group">
+                                        <input type="text" name="search" class="form-control border-primary shadow-none" 
+                                            value="{{ request('search') }}" placeholder="Cari nama destinasi...">
+                                        
+                                        {{-- Tombol Reset --}}
+                                        @if(request('search') || request('sort'))
+                                            <a href="{{ route('destinasi-wisata.index') }}" class="btn btn-outline-danger">
+                                                <i class="bi bi-x-lg"></i>
+                                            </a>
+                                        @endif
+
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <a href="{{ route('destinasi-wisata.create') }}" class="btn btn-primary mt-3" data-aos="fade-up">Tambah Destinasi Wisata</a>
                 </div>
                 @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show m-3" data-aos="fade-up" role="alert">
@@ -203,6 +235,11 @@
                                 </div>
                             </div>
                         @endforeach
+                        <div class="d-flex justify-content-center mt-5" data-aos="fade-up">
+                            <div class="pagination-wrapper">
+                                {{ $destinasi->links() }}
+                            </div>
+                        </div>    
                     </div>
                 </div>
                 <div class="section-bottom-button" data-aos="fade-up" data-aos-delay="150">
@@ -245,6 +282,30 @@
 
         .cursor-pointer {
             cursor: pointer;
+        }
+    </style>
+
+    <style>
+        .pagination-wrapper nav div:first-child {
+        display: none !important; /* Sembunyikan navigasi mobile bawaan */
+        }
+
+        .pagination-wrapper nav div:last-child {
+            display: flex !important;
+            flex-direction: column-reverse !important; /* Balik urutan: Info di bawah, Angka di atas */
+            align-items: center !important;
+            gap: 15px;
+        }
+
+        /* Mempercantik angka pagination */
+        .pagination-wrapper .relative.inline-flex.items-center {
+            border-radius: 8px !important;
+            margin: 0 2px;
+        }
+
+        .pagination-wrapper p.text-sm {
+            color: #6c757d !important;
+            font-size: 14px !important;
         }
     </style>
 

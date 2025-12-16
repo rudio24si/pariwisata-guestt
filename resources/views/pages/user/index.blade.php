@@ -84,11 +84,9 @@
                         <div class="swiper-nav-inner">
                         </div>
                     </destination-slider>
-                    <div class="d-flex justify-content-center mt-5">
-                        <div class="d-flex flex-column align-items-center">
-                            <div>
-                                {{ $users->links('pagination::bootstrap-5') }}
-                            </div>
+                    <div class="d-flex justify-content-center mt-5" data-aos="fade-up">
+                        <div class="pagination-wrapper">
+                            {{ $users->links() }}
                         </div>
                     </div>
                 </div>
