@@ -4,7 +4,6 @@
     <div class="container mt-5 vh-100">
         <h2>Tambah Data User</h2>
         <br>
-        {{-- Ganti route ke users.store --}}
         <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
@@ -22,7 +21,6 @@
                 @error('email') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
 
-            {{-- User biasanya butuh Password --}}
             <div class="mb-3">
                 <label>Password *</label>
                 <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
@@ -30,10 +28,20 @@
                 @error('password') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
 
-            {{-- Opsional: Konfirmasi Password --}}
             <div class="mb-3">
                 <label>Konfirmasi Password *</label>
                 <input type="password" name="password_confirmation" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-medium">Role *</label>
+                <select name="role" class="form-select @error('role') is-invalid @enderror" required>
+                    <option value="" selected disabled>-- Pilih Role --</option>
+                    <option value="Super Admin" {{ old('role') == 'super_admin' ? 'selected' : '' }}>Super Admin</option>
+                    <option value="Pelanggan" {{ old('role') == 'pelanggan' ? 'selected' : '' }}>Pelanggan</option>
+                    <option value="Mitra" {{ old('role') == 'mitra' ? 'selected' : '' }}>Mitra</option>
+                </select>
+                @error('role') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
 
             <div class="mb-3">

@@ -11,8 +11,8 @@
                         <div class="drawer-menu-top">
                             <div class="d-lg-none header-nav-headings">
                                 <a class="header-logo" href="/" aria-label="Hawaa">
-                                    <img src="{{ asset('assets/img/logo.png') }}" alt="Hawaa Logo" width="336" height="52"
-                                        loading="lazy">
+                                    <img src="{{ asset('assets/img/logo.png') }}" alt="Hawaa Logo" width="336"
+                                        height="52" loading="lazy">
                                 </a>
                                 <drawer-opener class="svg-wrapper menu-close" data-drawer=".drawer-menu">
                                     <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none"
@@ -39,20 +39,27 @@
                                     </a>
                                     <div class="menu-absolute header-submenu submenu-color radius4">
                                         <ul class="list-unstyled">
+                                            {{-- Menu User & Warga hanya untuk Super Admin dan Mitra --}}
+                                            @if(Auth::check() && in_array(Auth::user()->role, ['Super Admin', 'Mitra']))
+                                                <li class="nav-item">
+                                                    <a class="menu-link" href="{{route('user.index')}}">User</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="menu-link" href="{{route('warga.index')}}">Warga</a>
+                                                </li>
+                                            @endif
+
+                                            {{-- Menu di bawah ini muncul untuk semua role yang login --}}
                                             <li class="nav-item">
-                                                <a class="menu-link" href="{{route('user.index')}}">User</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="menu-link" href="{{route('warga.index')}}">Warga</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="menu-link" href="{{route('destinasi-wisata.index')}}">Destinasi Wisata</a>
+                                                <a class="menu-link"
+                                                    href="{{route('destinasi-wisata.index')}}">Destinasi Wisata</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="menu-link" href="{{route('homestay.index')}}">Homestay</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="menu-link" href="{{route('kamar-homestay.index')}}">Kamar Homestay</a>
+                                                <a class="menu-link" href="{{route('kamar-homestay.index')}}">Kamar
+                                                    Homestay</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -432,21 +439,29 @@
                             </div>
                         </div>
                     </new-dropdown>
-                    @auth
+                    @if(Auth::check())
                         <div class="user-dropdown">
                             <button class="dropdown-toggle">
-                                <svg class="icon-20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                                </svg>
+                                @if(Auth::user()->profile_picture)
+                                    <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}"
+                                        class="rounded-circle me-2" style="width: 24px; height: 24px; object-fit: cover;">
+                                @else
+                                    <svg class="icon-20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                                    </svg>
+                                @endif
                                 <span>{{ Auth::user()->name }}</span>
                             </button>
 
                             <div class="dropdown-menu">
+                                <a href="{{ route('user.edit', Auth::user()->id) }}"
+                                    class="dropdown-item border-bottom mb-2 pb-2">Edit Profile</a>
+
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit" class="dropdown-item">Logout</button>
+                                    <button type="submit" class="dropdown-item text-danger">Logout</button>
                                 </form>
                             </div>
                         </div>
@@ -459,7 +474,7 @@
                             </svg>
                             Login
                         </a>
-                    @endauth
+                    @endif
                     <drawer-opener class="svg-wrapper menu-open d-lg-none" data-drawer=".drawer-menu">
                         <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="26" cy="26" r="25.5" fill="white" stroke="currentColor" />

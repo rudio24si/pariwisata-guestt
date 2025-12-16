@@ -57,6 +57,18 @@
                 <label>Konfirmasi Password Baru</label>
                 <input type="password" name="password_confirmation" class="form-control">
             </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-medium">Role *</label>
+                <select name="role" class="form-select @error('role') is-invalid @enderror" required>
+                    <option value="" disabled>{{ $user->role }}</option>
+                    <option value="Super Admin" {{ old('role') == 'Super Admin' ? 'selected' : '' }}>Super Admin</option>
+                    <option value="Pelanggan" {{ old('role') == 'Pelanggan' ? 'selected' : '' }}>Pelanggan</option>
+                    <option value="Mitra" {{ old('role') == 'Mitra' ? 'selected' : '' }}>Mitra</option>
+                </select>
+                @error('role') <div class="text-danger">{{ $message }}</div> @enderror
+            </div>
+
             <div class="mb-3">
                 <label for="profile_picture" class="form-label fw-medium">Foto Profil</label>
                 <div class="input-group">

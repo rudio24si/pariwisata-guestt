@@ -66,6 +66,7 @@
                                             </div>
                                             <div class="title heading text-20">{{ $user->name }}</div>
                                             <div class="number text text-16">{{ $user->email }}</div>
+                                            <div class="number text text-16">Role : {{ $user->role }}</div>
                                         </a>
 
                                         <div class="action-buttons mt-3 d-flex gap-2 justify-content-center">

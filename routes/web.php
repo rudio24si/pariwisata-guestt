@@ -6,6 +6,7 @@ use App\Http\Controllers\DestinasiWisataController;
 use App\Http\Controllers\HomestayController;
 use App\Http\Controllers\KamarHomestayController;
 use App\Http\Controllers\BookingHomestayController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UlasanWisataController;
 use Illuminate\Support\Facades\Route;
@@ -13,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('dashboard');
 // });
-Route::get('/', [BookingHomestayController::class, 'index'])->name('dashboard');
+
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 // Authentication routes
 Route::get('/auth', [AuthController::class, 'index'])->name('login');
@@ -23,22 +25,47 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'registerPost'])->name('register.post');
 
-Route::resource('warga', WargaController::class);
-Route::resource('user', UserController::class);
-Route::resource('destinasi-wisata', DestinasiWisataController::class);
-Route::resource('homestay', HomestayController::class);
-Route::resource('kamar-homestay', KamarHomestayController::class);
-Route::resource('booking-homestay', BookingHomestayController::class);
+
+// Route::group(['middleware' => ['checkislogin']], function () {
+//     Route::group(['middleware' => ['checkrole:Super Admin']], function () {
+//         Route::resource('user', UserController::class);
+//         Route::resource('warga', WargaController::class);
+//         Route::resource('destinasi-wisata', DestinasiWisataController::class);
+//         Route::resource('homestay', HomestayController::class);
+//         Route::resource('kamar-homestay', KamarHomestayController::class);
+//         Route::resource('booking-homestay', BookingHomestayController::class);
+//     });
+//     Route::group(['middleware' => ['checkrole:Super Admin, Mitra']], function () {
+//         Route::resource('warga', WargaController::class)->only(['edit', 'update', 'show']);
+//         Route::resource('destinasi-wisata', DestinasiWisataController::class)->only(['edit', 'update', 'show']);
+//         Route::resource('homestay', HomestayController::class)->only(['edit', 'update', 'show']);
+//         Route::resource('kamar-homestay', KamarHomestayController::class)->only(['edit', 'update', 'show']);
+//         Route::resource('booking-homestay', BookingHomestayController::class)->only(['edit', 'update', 'show']);
+//     });
+//     Route::group(['middleware' => ['checkrole:Super Admin, Mitra, Pelanggan']], function () {
+//         Route::resource('destinasi-wisata', DestinasiWisataController::class)->only(['index']);
+//         Route::resource('homestay', HomestayController::class)->only(['index']);
+//         Route::resource('kamar-homestay', KamarHomestayController::class)->only(['index']);
+//         Route::resource('booking-homestay', BookingHomestayController::class)->only(['index']);
+//     });
+// });
+
+Route::group(['middleware' => ['checkislogin']], function () {
+
+    Route::group(['middleware' => ['checkrole:Super Admin,Mitra']], function () {
+        Route::resource('user', UserController::class);
+        Route::resource('warga', WargaController::class);
+    });
+    
+    Route::resource('destinasi-wisata', DestinasiWisataController::class);
+    Route::resource('homestay', HomestayController::class);
+    Route::resource('kamar-homestay', KamarHomestayController::class);
+    Route::resource('booking-homestay', BookingHomestayController::class);
+
+});
 
 Route::post('/ulasan-wisata', [UlasanWisataController::class, 'store'])
     ->name('ulasan-wisata.store');
 Route::delete('/ulasan-wisata/{ulasan}', [UlasanWisataController::class, 'destroy'])
     ->name('ulasan-wisata.destroy');
 Route::put('/ulasan-wisata/{id}', [UlasanWisataController::class, 'update'])->name('ulasan-wisata.update');
-
-
-// Route::get('/booking/{kamar_id}', [BookingHomestayController::class, 'create'])
-//     ->name('booking.create');
-
-// Route::post('/booking', [BookingHomestayController::class, 'store'])
-//     ->name('booking.store');

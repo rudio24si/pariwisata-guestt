@@ -34,6 +34,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
+            'role' => 'required|in:super_admin,pelanggan,mitra',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
             'name.required' => 'Nama lengkap wajib diisi!',
@@ -48,6 +49,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role,
         ];
 
         // 3. Logika Upload Foto
@@ -77,6 +79,7 @@ class UserController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|unique:users,email,' . $user->id,
                 'password' => 'nullable|min:8|confirmed',
+                'role' => 'required|in:Super Admin,Pelanggan,Mitra',
                 'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             ],
             [
@@ -92,7 +95,7 @@ class UserController extends Controller
             ]
         );
 
-        $data = $request->only('name', 'email');
+        $data = $request->only('name', 'email', 'role');
 
         // Hash password hanya jika diisi
         if ($request->filled('password')) {
