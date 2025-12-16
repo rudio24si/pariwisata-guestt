@@ -1,54 +1,85 @@
 @extends('layouts.guest.app')
 
 @section('content')
-    <!-- Main -->
     <main>
-        <!-- Popular Destination -->
-        <div class="popular-destination mt-100 vh-100">
+        <div class="popular-destination mt-100 mb-100">
             <div class="container">
-                <div class="section-headings section-headings-horizontal">
+                <div class="section-headings section-headings-horizontal mb-5">
                     <div class="section-headings-left" data-aos="fade-up">
-                        <h2 class="heading text-50">
-                            Kamar Homestay
-                        </h2>
+                        <h2 class="heading text-50">Kamar Homestay</h2>
                         <div class="text text-18">Informasi lengkap kamar homestay</div>
                     </div>
-                    <a href="{{ route('kamar-homestay.create') }}" class="button button--primary d-none d-md-flex"
-                        aria-label="Button" data-aos="fade-up" data-aos-delay="50">
-                        Tambah Kamar Homestay
-                    </a>
+                    <div class="section-headings-right d-flex flex-column align-items-end gap-3">
+                        <a href="{{ route('kamar-homestay.create') }}" class="button button--primary d-none d-md-flex"
+                            aria-label="Button" data-aos="fade-up" data-aos-delay="50">
+                            Tambah Kamar Homestay
+                        </a>
+                    </div>
                 </div>
+
+                <div class="row mb-5 justify-content-center" data-aos="fade-up">
+                    <div class="col-lg-10">
+                        <form action="{{ route('kamar-homestay.index') }}" method="GET">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <select name="sort" class="form-select border-primary py-2"
+                                        onchange="this.form.submit()">
+                                        <option value="">-- Urutkan Harga --</option>
+                                        <option value="termurah" {{ request('sort') == 'termurah' ? 'selected' : '' }}>Harga
+                                            Termurah</option>
+                                        <option value="termahal" {{ request('sort') == 'termahal' ? 'selected' : '' }}>Harga
+                                            Tertinggi</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="text" name="search" class="form-control border-primary py-2"
+                                            placeholder="Cari nama kamar..." value="{{ request('search') }}">
+                                        @if(request('search') || request('sort'))
+                                            <a href="{{ route('kamar-homestay.index') }}"
+                                                class="btn btn-outline-danger d-flex align-items-center">
+                                                <i class="bi bi-x"></i>
+                                            </a>
+                                        @endif
+                                        <button class="btn btn-primary px-4" type="submit">
+                                            <i class="bi bi-search me-2"></i>Cari
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
                 @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show m-3" data-aos="fade-up" role="alert">
                         <i class="bi bi-check-circle me-2"></i>{{ session('success') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
                 @endif
+
                 <div class="section-content">
                     <div class="row grid-gap">
-                        @foreach ($kamars as $kamar)
+                        @forelse ($kamars as $kamar)
                             <div class="col-md-4 col-12" data-aos="fade-up">
                                 <div class="popular-item-wrap popular-item-vertical border-wrapper radius16 hover-on-image">
                                     <div class="popular-item">
                                         <div class="image radius16">
-                                            <!-- Gambar kamar -->
                                             <div
                                                 style="width:100%; height:200px; background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                                                <!-- Placeholder image atau gambar real -->
                                             </div>
                                         </div>
                                         <div class="content">
                                             <div class="destination-info">
                                                 <h2 class="heading text-24">{{ $kamar->nama_kamar }}</h2>
-                                                <div class="text text-16">{{ $kamar->homestay->nama }}</div>
+                                                <div class="text text-16">{{ $kamar->homestay->nama ?? 'N/A' }}</div>
                                                 <div class="text text-14 text-muted mt-1">
                                                     <i class="bi bi-people me-1"></i>{{ $kamar->kapasitas }} orang •
-                                                    Rp {{ number_format($kamar->harga, 0, ',', '.') }}/malam
+                                                    <strong>Rp {{ number_format($kamar->harga, 0, ',', '.') }}/malam</strong>
                                                 </div>
                                             </div>
 
-                                            <!-- Tombol Action -->
-                                            <div class="d-flex gap-1">
+                                            <div class="d-flex gap-1 mt-3">
                                                 <a href="{{ route('kamar-homestay.show', $kamar->kamar_id) }}"
                                                     class="button button--secondary button--icon" title="Lihat">
                                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -71,7 +102,7 @@
                                                     method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" onclick="return confirm('Hapus?')"
+                                                    <button type="submit" onclick="return confirm('Hapus kamar ini?')"
                                                         class="button button--secondary button--icon" title="Hapus">
                                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
                                                             stroke="currentColor">
@@ -86,18 +117,23 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        @empty
+                            <div class="col-12 text-center py-5">
+                                <div class="alert alert-info py-4">
+                                    <i class="bi bi-info-circle fs-2 d-block mb-2"></i>
+                                    Kamar tidak ditemukan dengan kriteria tersebut.
+                                </div>
+                            </div>
+                        @endforelse
                     </div>
-                    <a href="destination.html" class="button button--primary d-md-none d-flex" aria-label="Button"
-                        data-aos="fade-up" data-aos-delay="50">
+
+                    <div class="d-flex justify-content-center mt-5">
+                        {{ $kamars->links() }}
+                    </div>
+
+                    <a href="{{ route('kamar-homestay.index') }}" class="button button--primary d-md-none d-flex mt-4"
+                        aria-label="Button">
                         View All
-                        <div class="svg-wrapper icon-18">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-                                <rect width="256" height="256" fill="none" />
-                                <polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
-                            </svg>
-                        </div>
                     </a>
                 </div>
             </div>

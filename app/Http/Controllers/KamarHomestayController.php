@@ -11,12 +11,33 @@ class KamarHomestayController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $kamars = KamarHomestay::with('homestay')->latest()->paginate(10);
+        // Mengambil query dasar beserta relasi homestay agar tidak N+1 query
+        $query = KamarHomestay::with('homestay');
+
+        // 1. Fitur Search berdasarkan Nama Kamar
+        if ($request->filled('search')) {
+            $query->where('nama_kamar', 'LIKE', '%' . $request->search . '%');
+        }
+
+        // 2. Fitur Filter berdasarkan Harga
+        if ($request->filled('sort')) {
+            if ($request->sort == 'termurah') {
+                $query->orderBy('harga', 'asc');
+            } elseif ($request->sort == 'termahal') {
+                $query->orderBy('harga', 'desc');
+            }
+        } else {
+            $query->latest(); // Default urutan terbaru
+        }
+
+        // 3. Pagination (6 data per halaman)
+        // withQueryString() menjaga agar filter tetap aktif saat pindah halaman pagination
+        $kamars = $query->paginate(6)->withQueryString();
+
         return view('pages.kamar_homestay.index', compact('kamars'));
     }
-
     /**
      * Show the form for creating a new resource.
      */
