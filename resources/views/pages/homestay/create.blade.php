@@ -2,14 +2,14 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center vh-100 align-items-center">
+        <div class="row justify-content-center m-5 align-items-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
                         <h4>Tambah Homestay Baru</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('homestay.store') }}" method="POST">
+                        <form action="{{ route('homestay.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             {{-- BAGIAN INI YANG DIUBAH --}}
                             <div class="mb-3">
@@ -107,6 +107,17 @@
                                     Masukkan dalam format array JSON. Contoh: ["WiFi", "AC", "Parkir"]
                                 </div>
                                 @error('fasilitas_json')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Tambah Foto Baru</label>
+                                <input type="file" name="filename[]"
+                                    class="form-control @error('filename.*') is-invalid @enderror" multiple
+                                    accept="image/*">
+                                <small class="text-muted">Bisa memilih lebih dari satu foto.</small>
+                                @error('filename.*')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

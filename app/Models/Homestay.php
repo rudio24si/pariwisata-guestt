@@ -33,4 +33,10 @@ class Homestay extends Model
     {
         return $this->belongsTo(Warga::class, 'pemilik_warga_id', 'warga_id');
     }
+
+    public function media()
+    {
+        return $this->hasMany(Media::class, 'ref_id', 'homestay_id')
+            ->where('ref_table', 'homestay');
+    }
 }

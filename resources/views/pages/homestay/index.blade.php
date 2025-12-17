@@ -59,8 +59,13 @@
                                 <div class="col-lg-4 col-md-6 col-12">
                                     <div class="product-card product-card-2 hover-on-image">
                                         <div class="image">
-                                            <img src="{{ asset('assets/img/product/1.jpg') }}" width="734" height="534"
-                                                loading="lazy" alt="Product Image">
+                                            @if($h->media->count() > 0)
+                                                <img src="{{ asset('images/' . $h->media->first()->file_name) }}" width="734"
+                                                    height="534" loading="lazy" alt="Product Image">
+                                            @else
+                                                <img src="{{ asset('assets/img/product/1.jpg') }}" width="734" height="534"
+                                                    loading="lazy" alt="Product Image">
+                                            @endif
                                             <div class="card-time-country">
                                                 <div class="person-time-item text text-14">
                                                     <i class="bi bi-house-door me-1"></i>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Homestay;
 use App\Models\Warga;
+use App\Models\Media;
 use Illuminate\Http\Request;
 
 class HomestayController extends Controller
@@ -60,10 +61,29 @@ class HomestayController extends Controller
             'rw' => 'nullable|string|max:3',
             'fasilitas_json' => 'nullable|json',
             'harga_per_malam' => 'required|numeric|min:0',
-            'status' => 'required|in:aktif,nonaktif'
+            'status' => 'required|in:aktif,nonaktif',
+            'filename' => 'required|array',
+            'filename.*' => 'image|mimes:jpg,jpeg,png|max:2000'
         ]);
 
-        Homestay::create($validated);
+        // 1. Simpan Homestay
+        $homestay = Homestay::create($validated);
+
+        // 2. Simpan Foto ke Tabel Media
+        if ($request->hasFile('filename')) {
+            foreach ($request->file('filename') as $file) {
+                $filename = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
+                $file->move(public_path('images'), $filename);
+
+                // Tambahkan ke database melalui model Media
+                // Pastikan Anda sudah mengimpor use App\Models\Media; di atas
+                Media::create([
+                    'file_name' => $filename,
+                    'ref_id' => $homestay->homestay_id, // Mengambil ID homestay yang baru dibuat
+                    'ref_table' => 'homestay',            // MENGATASI ERROR Gambar 2
+                ]);
+            }
+        }
 
         return redirect()->route('homestay.index')->with('success', 'Homestay berhasil ditambahkan!');
     }
@@ -101,14 +121,42 @@ class HomestayController extends Controller
             'pemilik_warga_id' => 'nullable|exists:warga,warga_id',
             'nama' => 'required|string|max:200',
             'alamat' => 'required|string',
-            'rt' => 'nullable|string|max:3',
-            'rw' => 'nullable|string|max:3',
-            'fasilitas_json' => 'nullable|json',
             'harga_per_malam' => 'required|numeric|min:0',
-            'status' => 'required|in:aktif,nonaktif'
+            'status' => 'required|in:aktif,nonaktif',
+            'filename.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2000',
+            'delete_media' => 'nullable|array', // Untuk menampung ID foto yang akan dihapus
         ]);
 
+        // 1. Update data homestay
         $homestay->update($validated);
+
+        // 2. Hapus foto yang dipilih (jika ada)
+        if ($request->has('delete_media')) {
+            foreach ($request->delete_media as $mediaId) {
+                $media = Media::find($mediaId);
+                if ($media) {
+                    // Hapus file fisik
+                    if (file_exists(public_path('images/' . $media->file_name))) {
+                        unlink(public_path('images/' . $media->file_name));
+                    }
+                    $media->delete();
+                }
+            }
+        }
+
+        // 3. Tambah foto baru (jika ada)
+        if ($request->hasFile('filename')) {
+            foreach ($request->file('filename') as $file) {
+                $filename = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
+                $file->move(public_path('images'), $filename);
+
+                \App\Models\Media::create([
+                    'file_name' => $filename,
+                    'ref_id' => $homestay->homestay_id,
+                    'ref_table' => 'homestay', // Penting agar relasi sinkron
+                ]);
+            }
+        }
 
         return redirect()->route('homestay.index')->with('success', 'Homestay berhasil diperbarui!');
     }
