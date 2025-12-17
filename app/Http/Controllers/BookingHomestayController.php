@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BookingHomestay;
 use App\Models\KamarHomestay;
 use App\Models\Warga;
+use App\Models\Media;
 use App\Models\Home;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -16,30 +17,36 @@ class BookingHomestayController extends Controller
      */
     public function index(Request $request)
     {
-        $query = KamarHomestay::query();
+        // 1. Ambil data booking secara keseluruhan dengan relasi Kamar, Media, dan Warga (Penyewa)
+        $query = BookingHomestay::with(['kamar.media', 'warga']);
 
-        // 1. Fitur Search berdasarkan Nama Kamar
+        // 2. Fitur Search berdasarkan Nama Kamar atau Nama Warga
         if ($request->filled('search')) {
-            $query->where('nama_kamar', 'LIKE', '%' . $request->search . '%');
+            $query->where(function ($q) use ($request) {
+                $q->whereHas('kamar', function ($inner) use ($request) {
+                    $inner->where('nama_kamar', 'LIKE', '%' . $request->search . '%');
+                })->orWhereHas('warga', function ($inner) use ($request) {
+                    $inner->where('nama', 'LIKE', '%' . $request->search . '%');
+                });
+            });
         }
 
-        // 2. Fitur Filter berdasarkan Harga
+        // 3. Fitur Filter berdasarkan Urutan
         if ($request->filled('sort')) {
-            if ($request->sort == 'termurah') {
-                $query->orderBy('harga', 'asc');
-            } elseif ($request->sort == 'termahal') {
-                $query->orderBy('harga', 'desc');
+            if ($request->sort == 'terlama') {
+                $query->orderBy('created_at', 'asc');
+            } else {
+                $query->latest();
             }
         } else {
             $query->latest();
         }
 
-        // 3. Pagination (Misal: 6 data per halaman)
-        $kamars = $query->paginate(6)->withQueryString();
+        // 4. Pagination
+        $bookings = $query->paginate(9)->withQueryString();
 
-        return view('pages.booking_homestay.index', compact('kamars'));
+        return view('pages.booking_homestay.index', compact('bookings'));
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -65,23 +72,28 @@ class BookingHomestayController extends Controller
      */
     public function store(Request $request)
     {
+        // 1. Validasi Input (Tambahkan validasi untuk filename)
         $request->validate([
             'kamar_id' => 'required',
             'warga_id' => 'required',
             'checkin' => 'required|date',
             'checkout' => 'required|date|after:checkin',
             'metode_bayar' => 'required',
+            'filename' => 'nullable|array', // Input file berupa array
+            'filename.*' => 'image|mimes:jpg,jpeg,png|max:2048' // Validasi tiap file
         ]);
 
         $kamar = KamarHomestay::findOrFail($request->kamar_id);
         $hargaPerMalam = $kamar->harga;
 
-        $days = Carbon::parse($request->checkin)
-            ->diffInDays(Carbon::parse($request->checkout));
+        // Hitung durasi menginap
+        $days = \Carbon\Carbon::parse($request->checkin)
+            ->diffInDays(\Carbon\Carbon::parse($request->checkout));
 
         $total = $days * $hargaPerMalam;
 
-        BookingHomestay::create([
+        // 2. Simpan Data Booking ke variabel agar kita bisa ambil ID-nya
+        $booking = BookingHomestay::create([
             'kamar_id' => $request->kamar_id,
             'warga_id' => $request->warga_id,
             'checkin' => $request->checkin,
@@ -91,6 +103,24 @@ class BookingHomestayController extends Controller
             'metode_bayar' => $request->metode_bayar,
         ]);
 
+        // 3. Simpan Bukti Pembayaran ke tabel Media (jika ada file)
+        if ($request->hasFile('filename')) {
+            foreach ($request->file('filename') as $file) {
+                // Buat nama file unik
+                $filename = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
+
+                // Pindahkan file ke folder public/images/pembayaran
+                $file->move(public_path('images'), $filename);
+
+                // Simpan ke tabel media
+                Media::create([
+                    'file_name' => $filename,
+                    'ref_id' => $booking->booking_id, // Pastikan ini sesuai dengan Primary Key model Booking Anda
+                    'ref_table' => 'booking_homestay',            // Penting: agar data tidak tertukar dengan foto kamar
+                ]);
+            }
+        }
+
         return redirect()->route('booking-homestay.index')
             ->with('success', 'Booking berhasil dibuat!');
     }
@@ -99,10 +129,12 @@ class BookingHomestayController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BookingHomestay $bookingHomestay)
+    public function show($id)
     {
-        $bookingHomestay->load(['kamar.homestay', 'warga']);
-        return view('pages.booking_homestay.show', compact('bookingHomestay'));
+        $booking = BookingHomestay::findOrFail($id);
+        // $booking->load(['kamar.homestay', 'warga', 'media']);
+
+        return view('pages.booking_homestay.show', compact('booking'));
     }
 
     /**
@@ -110,42 +142,87 @@ class BookingHomestayController extends Controller
      */
     public function edit(BookingHomestay $bookingHomestay)
     {
+        // 1. Load relasi yang dibutuhkan agar data media (bukti bayar) muncul di view
+        $bookingHomestay->load(['media', 'kamar.homestay']);
+
+        // 2. Ambil semua kamar aktif (jika admin ingin mengganti kamar saat edit)
         $kamars = KamarHomestay::whereHas('homestay', function ($query) {
             $query->where('status', 'aktif');
         })->with('homestay')->get();
 
-        $wargas = Warga::orderBy('nama')->get(['warga_id', 'nama', 'no_ktp']);
+        // 3. Ambil daftar warga (sesuaikan nama variabel dengan view: $warga)
+        $warga = Warga::orderBy('nama')->get(['warga_id', 'nama', 'no_ktp']);
 
-        return view('pages.booking_homestay.edit', compact('bookingHomestay', 'kamars', 'wargas'));
+        // 4. Return ke view dengan variabel yang sinkron
+        return view('pages.booking_homestay.edit', [
+            'booking' => $bookingHomestay, // Kita kirim sebagai $booking
+            'kamars' => $kamars,
+            'warga' => $warga
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, BookingHomestay $bookingHomestay)
+    public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'kamar_id' => 'required|exists:kamar_homestay,kamar_id',
-            'warga_id' => 'required|exists:warga,warga_id',
+        $booking = BookingHomestay::findOrFail($id);
+
+        // 1. Validasi Data
+        $request->validate([
+            'kamar_id' => 'required',
+            'warga_id' => 'required',
             'checkin' => 'required|date',
             'checkout' => 'required|date|after:checkin',
-            'status' => 'required|in:pending,confirmed,checked_in,checked_out,cancelled',
-            'metode_bayar' => 'nullable|in:tunai,transfer,qris,kredit',
-            'catatan' => 'nullable|string|max:500',
-            'total' => 'required|numeric|min:0'
+            'status' => 'required',
+            'metode_bayar' => 'required',
+            'filename.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2000'
         ]);
 
-        // Hitung jumlah malam jika tanggal berubah
-        if ($validated['checkin'] != $bookingHomestay->checkin || $validated['checkout'] != $bookingHomestay->checkout) {
-            $checkin = Carbon::parse($validated['checkin']);
-            $checkout = Carbon::parse($validated['checkout']);
-            $validated['jumlah_malam'] = $checkout->diffInDays($checkin);
+        // 2. Hitung Ulang Total Harga (jika tanggal berubah)
+        $kamar = KamarHomestay::findOrFail($request->kamar_id);
+        $checkin = \Carbon\Carbon::parse($request->checkin);
+        $checkout = \Carbon\Carbon::parse($request->checkout);
+        $days = $checkin->diffInDays($checkout);
+        $total = ($days == 0 ? 1 : $days) * $kamar->harga;
+
+        // 3. Update Data Utama
+        $booking->update(array_merge($request->all(), [
+            'total' => $total
+        ]));
+
+        // A. Logika HAPUS foto bukti pembayaran yang diceklis
+        if ($request->has('delete_media')) {
+            foreach ($request->delete_media as $mediaId) {
+                $media = \App\Models\Media::find($mediaId);
+                if ($media) {
+                    // Hapus file fisik dari folder public/images/pembayaran
+                    $path = public_path('images/pembayaran/' . $media->file_name);
+                    if (file_exists($path)) {
+                        unlink($path);
+                    }
+                    // Hapus record di database
+                    $media->delete();
+                }
+            }
         }
 
-        $bookingHomestay->update($validated);
+        // B. Logika TAMBAH foto bukti pembayaran baru
+        if ($request->hasFile('filename')) {
+            foreach ($request->file('filename') as $file) {
+                $filename = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
+                $file->move(public_path('images/pembayaran'), $filename);
 
-        return redirect()->route('booking-homestay.show', $bookingHomestay->booking_id)
-            ->with('success', 'Booking berhasil diperbarui!');
+                \App\Models\Media::create([
+                    'file_name' => $filename,
+                    'ref_id' => $booking->booking_id, // Pastikan PK Anda booking_id
+                    'ref_table' => 'booking_homestay',            // Sesuai konvensi kita sebelumnya
+                ]);
+            }
+        }
+
+        return redirect()->route('booking-homestay.index')
+            ->with('success', 'Data booking berhasil diperbarui!');
     }
 
     /**

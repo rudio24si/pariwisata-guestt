@@ -102,4 +102,11 @@ class BookingHomestay extends Model
         $hargaKamar = $this->kamar ? $this->kamar->harga : 0;
         return $jumlahMalam * $hargaKamar;
     }
+
+    public function media()
+    {
+        // ref_id adalah foreign key, id adalah owner key di DestinasiWisata
+        return $this->hasMany(Media::class, 'ref_id', 'booking_id')
+            ->where('ref_table', 'booking_homestay');
+    }
 }

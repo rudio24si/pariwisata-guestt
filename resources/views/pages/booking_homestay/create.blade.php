@@ -3,7 +3,7 @@
 @section('content')
     <main>
         <div class="container mt-5">
-            <div class="row justify-content-center vh-100">
+            <div class="row justify-content-center vh-100 mb-100">
                 <div class="col-md-8 col-lg-6">
                     <div class="card shadow border-0">
                         <div class="card-header bg-primary text-white">
@@ -24,7 +24,8 @@
                             </div>
 
                             <!-- Booking Form -->
-                            <form action="{{ route('booking-homestay.store') }}" method="POST" id="bookingForm">
+                            <form action="{{ route('booking-homestay.store') }}" method="POST" id="bookingForm"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="kamar_id" value="{{ $kamar->kamar_id }}">
                                 <input type="hidden" name="total_harga" id="totalHargaInput" value="">
@@ -90,6 +91,20 @@
                                         <option value="kredit"> Kredit
                                         </option>
                                     </select>
+                                </div>
+
+                                <div class="mb-4" id="buktiBayarContainer">
+                                    <label for="filename" class="form-label fw-medium">Upload Bukti Pembayaran</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-white"><i class="bi bi-image"></i></span>
+                                        <input type="file" name="filename[]" id="filename" class="form-control"
+                                            accept="image/*">
+                                    </div>
+                                    <div class="form-text">Format: JPG, JPEG, atau PNG. Maksimal 2MB.</div>
+
+                                    <div id="imagePreview" class="mt-2 d-none">
+                                        <img src="" id="previewImg" class="img-thumbnail" style="max-height: 150px;">
+                                    </div>
                                 </div>
 
                                 <!-- Submit Button -->

@@ -458,7 +458,8 @@
                             <div class="dropdown-menu">
                                 <a href="{{ route('user.edit', Auth::user()->id) }}"
                                     class="dropdown-item border-bottom mb-2 pb-2">Edit Profile</a>
-
+                                <a href="{{ route('booking-homestay.index', Auth::user()->id) }}"
+                                    class="dropdown-item border-bottom mb-2 pb-2">Booking Saya</a>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit" class="dropdown-item text-danger">Logout</button>

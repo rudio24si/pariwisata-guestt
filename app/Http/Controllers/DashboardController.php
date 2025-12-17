@@ -36,6 +36,6 @@ class DashboardController extends Controller
         // 3. Pagination (Misal: 6 data per halaman)
         $kamars = $query->paginate(6)->withQueryString();
 
-        return view('pages.booking_homestay.index', compact('kamars'));
+        return view('dashboard', compact('kamars'));
     }
 }
