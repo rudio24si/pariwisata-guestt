@@ -34,4 +34,11 @@ class DestinasiWisata extends Model
     {
         return $this->hasMany(UlasanWisata::class, 'destinasi_id', 'destinasi_id');
     }
+
+    public function media()
+    {
+        // ref_id adalah foreign key, id adalah owner key di DestinasiWisata
+        return $this->hasMany(Media::class, 'ref_id', 'destinasi_id')
+            ->where('ref_table', 'destinasi_wisata');
+    }
 }

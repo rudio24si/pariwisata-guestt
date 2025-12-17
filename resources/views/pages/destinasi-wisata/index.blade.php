@@ -55,21 +55,17 @@
                         @foreach($destinasi as $d)
                             <div class="col-lg-4 col-md-6 col-12" data-aos="fade-up">
                                 <div class="product-card product-card-3 radius16 hover-on-image">
-                                    <div class="image">
-                                        <img src="assets/img/product/6.jpg" width="734" height="446" loading="lazy"
-                                            alt="Product Image">
-                                        <toggle-btn>
-                                            <button type="button" class="wishlist-icon toogle-btn text-sky svg-wrapper"
-                                                aria-label="Wishlist button">
-                                                <svg viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M17.0705 9.36168L11.4136 15.0186C10.6326 15.7996 9.36623 15.7996 8.58519 15.0186L2.92833 9.36168C0.975712 7.40908 0.975712 4.24326 2.92833 2.29064C4.88095 0.338014 8.04678 0.338014 9.9994 2.29064C11.952 0.338014 15.1178 0.338014 17.0705 2.29064C19.0231 4.24326 19.0231 7.40908 17.0705 9.36168Z"
-                                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </button>
-                                        </toggle-btn>
-                                    </div>
+                                    @if($d->media->count() > 0)
+                                        <img src="{{ asset('images/' . $d->media->first()->file_name) }}" 
+                                            class="card-img-top" 
+                                            alt="{{ $d->nama }}"
+                                            style="height: 200px; object-fit: cover;">
+                                    @else
+                                        <img src="{{ asset('images/default-thumbnail.jpg') }}" 
+                                            class="card-img-top" 
+                                            alt="No Image available"
+                                            style="height: 200px; object-fit: cover;">
+                                    @endif
                                     <div class="content">
                                         <a href="booking-details.html" class="no-underline product-title"
                                             aria-label="Product title">
