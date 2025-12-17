@@ -115,22 +115,46 @@ class DestinasiWisataController extends Controller
     {
         $destinasi = DestinasiWisata::findOrFail($id);
 
+        // Validasi data
         $request->validate([
             'nama' => 'required|max:150',
-            'deskripsi' => 'nullable',
-            'alamat' => 'required',
-            'rt' => 'nullable|max:3',
-            'rw' => 'nullable|max:3',
-            'jam_buka' => 'nullable|date_format:H:i',
-            'jam_tutup' => 'nullable|date_format:H:i|after:jam_buka',
-            'tiket' => 'required|numeric|min:0',
-            'kontak' => 'nullable|max:20'
+            'tiket' => 'required|numeric',
+            'filename.*' => 'nullable|mimes:jpg,jpeg,png|max:2000'
         ]);
 
+        // Update data utama
         $destinasi->update($request->all());
 
-        return redirect()->route('destinasi-wisata.index')
-            ->with('success', 'Destinasi wisata berhasil diperbarui!');
+        // A. Logika HAPUS foto yang diceklis
+        if ($request->has('delete_media')) {
+            foreach ($request->delete_media as $mediaId) {
+                $media = Media::find($mediaId);
+                if ($media) {
+                    // Hapus file fisik dari folder public/images
+                    if (file_exists(public_path('images/' . $media->file_name))) {
+                        unlink(public_path('images/' . $media->file_name));
+                    }
+                    // Hapus record di database
+                    $media->delete();
+                }
+            }
+        }
+
+        // B. Logika TAMBAH foto baru (sama seperti fungsi store)
+        if ($request->hasFile('filename')) {
+            foreach ($request->file('filename') as $file) {
+                $filename = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
+                $file->move(public_path('images'), $filename);
+
+                Media::create([
+                    'file_name' => $filename,
+                    'ref_id' => $destinasi->destinasi_id,
+                    'ref_table' => 'destinasi_wisata',
+                ]);
+            }
+        }
+
+        return redirect()->route('destinasi-wisata.index')->with('success', 'Data berhasil diperbarui!');
     }
 
     /**

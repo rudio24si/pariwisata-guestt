@@ -18,75 +18,93 @@
                     </div>
 
                     <div class="card-body p-4">
-                        <form action="{{ route('destinasi-wisata.update', $destinasi->destinasi_id) }}" method="POST">
+                        {{-- MODIFIKASI: Tambahkan enctype untuk upload file --}}
+                        <form action="{{ route('destinasi-wisata.update', $destinasi->destinasi_id) }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
                             <div class="row">
+                                {{-- ... Input Nama sampai Harga Tiket (Tetap Sama) ... --}}
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Nama Destinasi *</label>
                                     <input type="text" name="nama" class="form-control" required
-                                        placeholder="Nama tempat wisata" value="{{ old('nama', $destinasi->nama) }}">
-                                    @error('nama') <div class="text-danger small">{{ $message }}</div> @enderror
+                                        value="{{ old('nama', $destinasi->nama) }}">
                                 </div>
-
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Kontak</label>
-                                    <input type="text" name="kontak" class="form-control" placeholder="Nomor telepon"
+                                    <input type="text" name="kontak" class="form-control"
                                         value="{{ old('kontak', $destinasi->kontak) }}">
-                                    @error('kontak') <div class="text-danger small">{{ $message }}</div> @enderror
                                 </div>
-
                                 <div class="col-12 mb-3">
                                     <label class="form-label">Deskripsi</label>
-                                    <textarea name="deskripsi" class="form-control" rows="3"
-                                        placeholder="Deskripsi tempat wisata">{{ old('deskripsi', $destinasi->deskripsi) }}</textarea>
+                                    <textarea name="deskripsi" class="form-control"
+                                        rows="3">{{ old('deskripsi', $destinasi->deskripsi) }}</textarea>
                                 </div>
-
                                 <div class="col-12 mb-3">
                                     <label class="form-label">Alamat Lengkap *</label>
-                                    <textarea name="alamat" class="form-control" rows="2" required
-                                        placeholder="Alamat lengkap">{{ old('alamat', $destinasi->alamat) }}</textarea>
-                                    @error('alamat') <div class="text-danger small">{{ $message }}</div> @enderror
+                                    <textarea name="alamat" class="form-control" rows="2"
+                                        required>{{ old('alamat', $destinasi->alamat) }}</textarea>
                                 </div>
-
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">RT</label>
-                                    <input type="text" name="rt" class="form-control" placeholder="001"
+                                    <input type="text" name="rt" class="form-control"
                                         value="{{ old('rt', $destinasi->rt) }}">
-                                    @error('rt') <div class="text-danger small">{{ $message }}</div> @enderror
                                 </div>
-
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">RW</label>
-                                    <input type="text" name="rw" class="form-control" placeholder="002"
+                                    <input type="text" name="rw" class="form-control"
                                         value="{{ old('rw', $destinasi->rw) }}">
-                                    @error('rw') <div class="text-danger small">{{ $message }}</div> @enderror
                                 </div>
-
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">Jam Buka</label>
                                     <input type="time" name="jam_buka" class="form-control"
                                         value="{{ old('jam_buka', $destinasi->jam_buka ? date('H:i', strtotime($destinasi->jam_buka)) : '') }}">
-                                    @error('jam_buka') <div class="text-danger small">{{ $message }}</div> @enderror
                                 </div>
-
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">Jam Tutup</label>
                                     <input type="time" name="jam_tutup" class="form-control"
                                         value="{{ old('jam_tutup', $destinasi->jam_tutup ? date('H:i', strtotime($destinasi->jam_tutup)) : '') }}">
-                                    @error('jam_tutup') <div class="text-danger small">{{ $message }}</div> @enderror
                                 </div>
-
                                 <div class="col-md-6 mb-4">
                                     <label class="form-label">Harga Tiket (Rp) *</label>
                                     <div class="input-group">
                                         <span class="input-group-text">Rp</span>
-                                        <input type="number" name="tiket" class="form-control" required min="0" step="1000"
+                                        <input type="number" name="tiket" class="form-control" required
                                             value="{{ old('tiket', $destinasi->tiket) }}">
                                     </div>
-                                    <small class="text-muted">Masukkan 0 jika gratis</small>
-                                    @error('tiket') <div class="text-danger small">{{ $message }}</div> @enderror
+                                </div>
+
+                                <hr>
+
+                                {{-- MODIFIKASI: Bagian Manajemen Foto --}}
+                                <div class="col-12 mb-4">
+                                    <label class="form-label fw-bold">Foto Destinasi Saat Ini</label>
+                                    <div class="row g-2 mb-3">
+                                        @forelse($destinasi->media as $m)
+                                            <div class="col-md-3 col-6 position-relative shadow-sm">
+                                                <img src="{{ asset('images/' . $m->file_name) }}" class="img-thumbnail w-100"
+                                                    style="height: 120px; object-fit: cover;">
+                                                {{-- Checkbox untuk menghapus foto tertentu --}}
+                                                <div class="position-absolute top-0 end-0 m-1">
+                                                    <input type="checkbox" name="delete_media[]" value="{{ $m->id }}"
+                                                        class="form-check-input border-danger" title="Ceklis untuk hapus">
+                                                </div>
+                                            </div>
+                                        @empty
+                                            <div class="col-12">
+                                                <p class="text-muted small italic">Belum ada foto yang diunggah.</p>
+                                            </div>
+                                        @endforelse
+                                    </div>
+                                    @if($destinasi->media->count() > 0)
+                                        <small class="text-danger d-block mb-3">* Ceklis foto di atas jika ingin
+                                            menghapusnya.</small>
+                                    @endif
+
+                                    <label class="form-label fw-bold">Tambah Foto Baru</label>
+                                    <input type="file" name="filename[]" class="form-control" multiple accept="image/*">
+                                    <small class="text-muted">Bisa pilih lebih dari satu foto (Max: 2MB per file)</small>
                                 </div>
                             </div>
 
@@ -100,7 +118,7 @@
                                         <i class="bi bi-eye me-1"></i> Lihat
                                     </a>
                                     <button type="submit" class="btn" style="background-color: #004d60; color: white;">
-                                        <i class="bi bi-save me-1"></i> Update Data
+                                        <i class="bi bi-save me-1"></i> Simpan Perubahan
                                     </button>
                                 </div>
                             </div>
@@ -110,6 +128,4 @@
             </div>
         </div>
     </div>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 @endsection
