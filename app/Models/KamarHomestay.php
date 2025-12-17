@@ -42,4 +42,10 @@ class KamarHomestay extends Model
     {
         return implode(', ', $this->fasilitas_array);
     }
+
+    public function media()
+    {
+        return $this->hasMany(Media::class, 'ref_id', 'kamar_id')
+            ->where('ref_table', 'kamar_homestay');
+    }
 }

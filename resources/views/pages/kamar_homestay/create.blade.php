@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="card-body p-4">
-                    <form action="{{ route('kamar-homestay.store') }}" method="POST">
+                    <form action="{{ route('kamar-homestay.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <!-- Homestay Selection -->
@@ -104,6 +104,16 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="mb-3">
+                                <label class="form-label fw-bold">Tambah Foto Baru</label>
+                                <input type="file" name="filename[]"
+                                    class="form-control @error('filename.*') is-invalid @enderror" multiple
+                                    accept="image/*">
+                                <small class="text-muted">Bisa memilih lebih dari satu foto.</small>
+                                @error('filename.*')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
                         <!-- Submit Button -->
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">

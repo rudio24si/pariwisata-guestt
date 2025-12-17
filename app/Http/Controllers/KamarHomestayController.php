@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KamarHomestay;
 use App\Models\Homestay;
+use App\Models\Media;
 use Illuminate\Http\Request;
 
 class KamarHomestayController extends Controller
@@ -13,8 +14,8 @@ class KamarHomestayController extends Controller
      */
     public function index(Request $request)
     {
-        // Mengambil query dasar beserta relasi homestay agar tidak N+1 query
-        $query = KamarHomestay::with('homestay');
+        // MODIFIKASI: Tambahkan with('media') untuk mengambil data foto sekaligus
+        $query = KamarHomestay::with(['media', 'homestay']);
 
         // 1. Fitur Search berdasarkan Nama Kamar
         if ($request->filled('search')) {
@@ -29,11 +30,10 @@ class KamarHomestayController extends Controller
                 $query->orderBy('harga', 'desc');
             }
         } else {
-            $query->latest(); // Default urutan terbaru
+            $query->latest();
         }
 
-        // 3. Pagination (6 data per halaman)
-        // withQueryString() menjaga agar filter tetap aktif saat pindah halaman pagination
+        // 3. Pagination
         $kamars = $query->paginate(6)->withQueryString();
 
         return view('pages.kamar_homestay.index', compact('kamars'));
@@ -60,11 +60,27 @@ class KamarHomestayController extends Controller
             'nama_kamar' => 'required|string|max:100',
             'kapasitas' => 'required|integer|min:1|max:10',
             'fasilitas_json' => 'nullable|json',
-            'harga' => 'required|numeric|min:0'
+            'harga' => 'required|numeric|min:0',
+            'filename' => 'required|array',
+            'filename.*' => 'image|mimes:jpg,jpeg,png|max:2000'
         ]);
 
-        KamarHomestay::create($validated);
+        $kamarHomestay = KamarHomestay::create($validated);
 
+        if ($request->hasFile('filename')) {
+            foreach ($request->file('filename') as $file) {
+                $filename = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
+                $file->move(public_path('images'), $filename);
+
+                // Tambahkan ke database melalui model Media
+                // Pastikan Anda sudah mengimpor use App\Models\Media; di atas
+                Media::create([
+                    'file_name' => $filename,
+                    'ref_id' => $kamarHomestay->kamar_id,
+                    'ref_table' => 'kamar_homestay',
+                ]);
+            }
+        }
         return redirect()->route('kamar-homestay.index')
             ->with('success', 'Kamar berhasil ditambahkan!');
     }
@@ -106,11 +122,27 @@ class KamarHomestayController extends Controller
             'nama_kamar' => 'required|string|max:100',
             'kapasitas' => 'required|integer|min:1|max:10',
             'fasilitas_json' => 'nullable|json',
-            'harga' => 'required|numeric|min:0'
+            'harga' => 'required|numeric|min:0',
+            'filename.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2000',
+            'delete_media' => 'nullable|array',
         ]);
 
         $kamarHomestay->update($validated);
 
+        if ($request->hasFile('filename')) {
+            foreach ($request->file('filename') as $file) {
+                $filename = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
+                $file->move(public_path('images'), $filename);
+
+                // Tambahkan ke database melalui model Media
+                // Pastikan Anda sudah mengimpor use App\Models\Media; di atas
+                Media::create([
+                    'file_name' => $filename,
+                    'ref_id' => $kamarHomestay->kamar_id,
+                    'ref_table' => 'kamar_homestay',
+                ]);
+            }
+        }
         return redirect()->route('kamar-homestay.index')
             ->with('success', 'Kamar berhasil diperbarui!');
     }

@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="card-body p-4">
-                    <form action="{{ route('kamar-homestay.update', $kamarHomestay->kamar_id) }}" method="POST">
+                    <form action="{{ route('kamar-homestay.update', $kamarHomestay->kamar_id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -79,7 +79,7 @@
                                     <input type="number" class="form-control @error('harga') is-invalid @enderror" 
                                            id="harga" name="harga" 
                                            value="{{ old('harga', $kamarHomestay->harga) }}" 
-                                           min="0" step="1000" required>
+                                            required>
                                     @error('harga')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -96,7 +96,7 @@
                             <textarea class="form-control @error('fasilitas_json') is-invalid @enderror" 
                                       id="fasilitas_json" name="fasilitas_json" 
                                       rows="4" placeholder='["AC", "TV", "WiFi", "Kamar Mandi Dalam", "Breakfast"]'>
-                                {{ old('fasilitas_json', $kamarHomestay->fasilitas_json) }}
+                                {{ old('fasilitas_json', is_array($kamarHomestay->fasilitas_json) ? json_encode($kamarHomestay->fasilitas_json) : $kamarHomestay->fasilitas_json) }}
                             </textarea>
                             <div class="form-text">
                                 Masukkan dalam format JSON array. Contoh: ["AC", "TV", "WiFi"]
@@ -106,10 +106,34 @@
                             @enderror
                         </div>
 
+                        <div class="mb-4">
+                                <label class="form-label fw-bold"><i class="bi bi-images"></i> Foto Kamar Saat Ini</label>
+                                <div class="row g-2 mb-3">
+                                    @forelse($kamarHomestay->media as $m)
+                                        <div class="col-md-4 col-6">
+                                            <div class="position-relative border rounded p-1">
+                                                <img src="{{ asset('images/' . $m->file_name) }}" class="img-fluid rounded" style="height: 120px; width: 100%; object-fit: cover;">
+                                                <div class="form-check mt-1">
+                                                    <input class="form-check-input border-danger" type="checkbox" name="delete_media[]" value="{{ $m->id }}" id="del_{{ $m->id }}">
+                                                    <label class="form-check-label small text-danger" for="del_{{ $m->id }}">Hapus foto ini</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @empty
+                                        <div class="col-12"><p class="text-muted small">Belum ada foto diunggah.</p></div>
+                                    @endforelse
+                                </div>
+
+                                <label class="form-label fw-bold">Tambah Foto Baru</label>
+                                <input type="file" name="filename[]" class="form-control @error('filename.*') is-invalid @enderror" multiple accept="image/*">
+                                <small class="text-muted">Bisa memilih lebih dari satu foto.</small>
+                                @error('filename.*') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
+                            </div>
+
                         <!-- Info Tambahan -->
                         <div class="alert alert-light border mb-4">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-6">D
                                     <small class="text-muted">Dibuat</small>
                                     <div class="fw-bold">{{ $kamarHomestay->created_at->format('d M Y H:i') }}</div>
                                 </div>

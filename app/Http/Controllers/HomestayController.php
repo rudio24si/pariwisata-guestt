@@ -31,9 +31,6 @@ class HomestayController extends Controller
         } else {
             $query->latest(); // Default urutan terbaru jika tidak ada filter
         }
-
-        // 3. Fitur Pagination (Misal: 6 data per halaman)
-        // withQueryString() penting agar parameter search & sort tidak hilang saat pindah halaman
         $homestays = $query->paginate(6)->withQueryString();
 
         return view('pages.homestay.index', compact('homestays'));
@@ -124,7 +121,7 @@ class HomestayController extends Controller
             'harga_per_malam' => 'required|numeric|min:0',
             'status' => 'required|in:aktif,nonaktif',
             'filename.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2000',
-            'delete_media' => 'nullable|array', // Untuk menampung ID foto yang akan dihapus
+            'delete_media' => 'nullable|array',
         ]);
 
         // 1. Update data homestay
