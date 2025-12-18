@@ -60,8 +60,8 @@
                                                     <img src="{{ Storage::url($user->profile_picture) }}" alt="Profile Picture"
                                                         width="336" height="474" loading="lazy" alt="User Image">
                                                 @else
-                                                    <img src="{{ asset('assets/img/destination/sm-1.jpg') }}" width="336"
-                                                        height="474" loading="lazy" alt="User Image">
+                                                    <img src="{{ asset('assets/img/cimage.jpg') }}" width="336" height="474"
+                                                        loading="lazy" alt="User Image">
                                                 @endif
                                             </div>
                                             <div class="title heading text-20">{{ $user->name }}</div>

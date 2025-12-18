@@ -55,7 +55,7 @@ class DestinasiWisataController extends Controller
             'tiket' => 'required|numeric|min:0',
             // Validasi file (disesuaikan dengan gambar referensi Anda)
             'filename' => 'required',
-            'filename.*' => 'mimes:jpg,jpeg,png|max:2000'
+            'filename.*' => 'mimes:jpg,jpeg,png|max:3000'
         ]);
 
         // 1. Simpan Destinasi Utama
@@ -119,7 +119,7 @@ class DestinasiWisataController extends Controller
         $request->validate([
             'nama' => 'required|max:150',
             'tiket' => 'required|numeric',
-            'filename.*' => 'nullable|mimes:jpg,jpeg,png|max:2000'
+            'filename.*' => 'nullable|mimes:jpg,jpeg,png|max:3000'
         ]);
 
         // Update data utama

@@ -69,7 +69,7 @@
                                                 <img src="{{ asset('images/' . $kamar->media->first()->file_name) }}" width="734"
                                                     height="534" loading="lazy" alt="Product Image">
                                             @else
-                                                <img src="{{ asset('assets/img/product/1.jpg') }}"
+                                                <img src="{{ asset('assets/img/cimage.jpg') }}"
                                                     loading="lazy" alt="Product Image">
                                             @endif
                                         </div>

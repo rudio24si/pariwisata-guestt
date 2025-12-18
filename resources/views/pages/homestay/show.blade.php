@@ -137,8 +137,9 @@
                                     <i class="bi bi-star me-2"></i>Fasilitas
                                 </h5>
                                 @php
-                                    $fasilitas = $homestay->fasilitas_json;
-                                    echo implode(', ', $fasilitas ?? []);
+                                    // Decode string JSON menjadi array
+                                    $fasilitas = json_decode($homestay->fasilitas_json, true);
+                                    echo is_array($fasilitas) ? implode(', ', $fasilitas) : 'Tidak ada fasilitas';
                                 @endphp
 
                                 @if (count($fasilitas) > 0)
@@ -342,11 +343,11 @@
             });
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // WhatsApp share button
             const whatsappBtn = document.querySelector('.btn-success.btn-sm:last-child');
             if (whatsappBtn) {
-                whatsappBtn.addEventListener('click', function(e) {
+                whatsappBtn.addEventListener('click', function (e) {
                     e.preventDefault();
                     shareViaWhatsApp();
                 });
@@ -357,7 +358,7 @@
             if (addressElement) {
                 addressElement.style.cursor = 'pointer';
                 addressElement.title = 'Klik untuk menyalin alamat';
-                addressElement.addEventListener('click', function() {
+                addressElement.addEventListener('click', function () {
                     copyToClipboard("{{ $homestay->alamat }}", 'address-copy');
                 });
             }

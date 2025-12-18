@@ -63,7 +63,7 @@
                                                 <img src="{{ asset('images/' . $h->media->first()->file_name) }}" width="734"
                                                     height="534" loading="lazy" alt="Product Image">
                                             @else
-                                                <img src="{{ asset('assets/img/product/1.jpg') }}" width="734" height="534"
+                                                <img src="{{ asset('assets/img/cimage.jpg') }}" width="734" height="534"
                                                     loading="lazy" alt="Product Image">
                                             @endif
                                             <div class="card-time-country">

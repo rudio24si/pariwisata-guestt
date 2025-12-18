@@ -61,7 +61,7 @@
                                             alt="{{ $d->nama }}"
                                             style="height: 200px; object-fit: cover;">
                                     @else
-                                        <img src="{{ asset('images/default-thumbnail.jpg') }}" 
+                                        <img src="{{ asset('assets/img/cimage.jpg') }}" 
                                             class="card-img-top" 
                                             alt="No Image available"
                                             style="height: 200px; object-fit: cover;">

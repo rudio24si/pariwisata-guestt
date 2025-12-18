@@ -60,7 +60,7 @@ class HomestayController extends Controller
             'harga_per_malam' => 'required|numeric|min:0',
             'status' => 'required|in:aktif,nonaktif',
             'filename' => 'required|array',
-            'filename.*' => 'image|mimes:jpg,jpeg,png|max:2000'
+            'filename.*' => 'image|mimes:jpg,jpeg,png|max:4000'
         ]);
 
         // 1. Simpan Homestay
@@ -120,7 +120,7 @@ class HomestayController extends Controller
             'alamat' => 'required|string',
             'harga_per_malam' => 'required|numeric|min:0',
             'status' => 'required|in:aktif,nonaktif',
-            'filename.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2000',
+            'filename.*' => 'nullable|image|mimes:jpg,jpeg,png|max:4000',
             'delete_media' => 'nullable|array',
         ]);
 

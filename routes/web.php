@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 //     return view('dashboard');
 // });
 
+Route::get('/identitas', function () {
+    return view('pages.identitas');
+})->name('identitas');
+Route::get('/tentang', function () {
+    return view('pages.tentang');
+})->name('tentang');
+
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 // Authentication routes
