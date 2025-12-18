@@ -69,13 +69,12 @@
                                                 <img src="{{ asset('images/' . $kamar->media->first()->file_name) }}" width="734"
                                                     height="534" loading="lazy" alt="Product Image">
                                             @else
-                                                <div
-                                                    style="width:100%; height:200px; background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                                                </div>
+                                                <img src="{{ asset('assets/img/product/1.jpg') }}"
+                                                    loading="lazy" alt="Product Image">
                                             @endif
                                         </div>
                                         <div class="content">
-                                            <div class="destination-info">
+                                            <div class="destination-info mt-4">
                                                 <h2 class="heading text-24">{{ $kamar->nama_kamar }}</h2>
                                                 <div class="text text-16">{{ $kamar->homestay->nama ?? 'N/A' }}</div>
                                                 <div class="text text-14 text-muted mt-1">

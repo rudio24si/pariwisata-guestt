@@ -79,7 +79,7 @@ class UserController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|unique:users,email,' . $user->id,
                 'password' => 'nullable|min:8|confirmed',
-                'role' => 'required|in:Super Admin,Pelanggan,Mitra',
+                'role' => 'nullable|in:Super Admin,Pelanggan,Mitra',
                 'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             ],
             [
