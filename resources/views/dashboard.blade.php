@@ -129,10 +129,194 @@
                     </div>
 
                     <div class="d-flex justify-content-center mt-5" data-aos="fade-up">
-                        {{ $kamars->links() }}
+                        {{ $kamars->links('pagination::bootstrap-5') }}
+                    </div>
+
+                    <!-- Kartu Identitas Pengembang -->
+                    <div class="developer-card mt-5 mb-5" data-aos="fade-up">
+                        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                            <div class="card-body p-0">
+                                <div class="row g-0">
+                                    <div
+                                        class="col-md-4 bg-light d-flex align-items-center justify-content-center py-5 py-md-0">
+                                        <div class="profile-img-wrapper">
+                                            <img src="{{asset('assets/img/profile.jpg')}}" alt="Foto Pengembang"
+                                                class="rounded-circle border border-5 border-primary shadow-sm profile-img">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8 p-4 p-lg-5">
+                                        <div class="mb-4">
+                                            <span
+                                                class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3 fw-medium">Identitas
+                                                Pengembang</span>
+                                            <h2 class="fw-bold mb-1 text-dark">Rudio Winaldo</h2>
+                                            <p class="text-muted fw-medium mb-0">Mahasiswa Sistem Informasi — Politeknik
+                                                Caltex Riau</p>
+                                        </div>
+
+                                        <div class="row g-3 mb-4">
+                                            <div class="col-sm-6">
+                                                <div
+                                                    class="d-flex align-items-center p-2 rounded-3 bg-light-subtle border border-light">
+                                                    <i class="fas fa-id-card text-primary me-3 fs-5"></i>
+                                                    <div>
+                                                        <small class="text-muted d-block"
+                                                            style="font-size: 0.7rem; text-uppercase; letter-spacing: 0.5px;">NIM</small>
+                                                        <span class="fw-bold text-dark">2457301128</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div
+                                                    class="d-flex align-items-center p-2 rounded-3 bg-light-subtle border border-light">
+                                                    <i class="fas fa-calendar-alt text-primary me-3 fs-5"></i>
+                                                    <div>
+                                                        <small class="text-muted d-block"
+                                                            style="font-size: 0.7rem; text-uppercase; letter-spacing: 0.5px;">Generasi</small>
+                                                        <span class="fw-bold text-dark">G24</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div
+                                                    class="d-flex align-items-center p-2 rounded-3 bg-light-subtle border border-light">
+                                                    <i class="fas fa-envelope text-primary me-3 fs-5"></i>
+                                                    <div>
+                                                        <small class="text-muted d-block"
+                                                            style="font-size: 0.7rem; text-uppercase; letter-spacing: 0.5px;">Email
+                                                            Mahasiswa</small>
+                                                        <span class="fw-bold text-dark">rudio24si@mahasiswa.pcr.ac.id</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr class="mb-4 opacity-10">
+
+                                        <div class="d-flex w-100 gap-2 mt-4">
+                                            <a href="https://wa.me/6285265488368" class="btn-social si-whatsapp"
+                                                title="WhatsApp" target="_blank">
+                                                <i class="fab fa-whatsapp"></i>
+                                            </a>
+
+                                            <a href="https://www.linkedin.com/in/rudio-winaldo-80105139b/"
+                                                class="btn-social si-linkedin" title="LinkedIn" target="_blank">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </a>
+
+                                            <a href="https://github.com/rudio24si" class="btn-social si-github"
+                                                title="GitHub" target="_blank">
+                                                <i class="fab fa-github"></i>
+                                            </a>
+
+                                            <a href="https://www.instagram.com/rudio.wnl?igsh=cG81eXdnZmU5bHJ4"
+                                                class="btn-social si-instagram" title="Instagram" target="_blank">
+                                                <i class="fab fa-instagram"></i>
+                                            </a>
+
+                                            <a href="https://www.youtube.com/@KIDYOO999" class="btn-social si-youtube"
+                                                title="YouTube" target="_blank">
+                                                <i class="fab fa-youtube"></i>
+                                            </a>
+
+                                            <a href="http://googleusercontent.com/spotify.com/4"
+                                                class="btn-social si-spotify" title="Spotify" target="_blank">
+                                                <i class="fab fa-spotify"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+
+    <style>
+        /* Card & Image Styling */
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .developer-card:hover .profile-img {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* Info Box Styling */
+        .bg-light-subtle {
+            background-color: #fcfcfd;
+        }
+
+        .ls-1 {
+            letter-spacing: 1px;
+        }
+
+        /* Social Buttons (Lebih kecil & clean) */
+        .btn-social {
+            flex: 1;
+            /* Membuat tombol melebar mengisi ruang kosong secara merata */
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            /* Bentuk kotak dengan sudut halus (modern) */
+            background-color: #f8f9fa;
+            color: #555;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #eee;
+        }
+
+        /* Efek Hover tetap sama, namun lebih terlihat karena tombol lebih lebar */
+        .btn-social:hover {
+            transform: translateY(-5px);
+            color: white !important;
+            border-color: transparent;
+        }
+
+        .si-whatsapp:hover {
+            background-color: #25D366;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .si-linkedin:hover {
+            background-color: #0077b5;
+            box-shadow: 0 5px 15px rgba(0, 119, 181, 0.3);
+        }
+
+        .si-github:hover {
+            background-color: #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .si-instagram:hover {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        }
+
+        .si-youtube:hover {
+            background-color: #ff0000;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .si-spotify:hover {
+            background-color: #1DB954;
+            box-shadow: 0 5px 15px rgba(29, 185, 84, 0.3);
+        }
+
+        /* Responsivitas agar tidak terlalu tipis di HP */
+        @media (max-width: 576px) {
+            .btn-social {
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+    </style>
 @endsection

@@ -28,7 +28,7 @@
 
 <!-- BOOTSTRAP -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 <style>
     .user-dropdown {
@@ -103,5 +103,99 @@
         gap: 8px;
         color: inherit;
         text-decoration: none;
+    }
+
+    .floating-whatsapp {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        z-index: 9999;
+        transition: all 0.3s ease;
+    }
+
+    .whatsapp-icon {
+        width: 60px;
+        height: 60px;
+        background-color: #25D366;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 35px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Efek Animasi Berdenyut */
+    .whatsapp-icon::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #25D366;
+        border-radius: 50%;
+        z-index: -1;
+        animation: pulse-wa 2s infinite;
+    }
+
+    @keyframes pulse-wa {
+        0% {
+            transform: scale(1);
+            opacity: 0.7;
+        }
+
+        100% {
+            transform: scale(1.6);
+            opacity: 0;
+        }
+    }
+
+    .whatsapp-text {
+        background-color: white;
+        color: #444;
+        padding: 8px 15px 8px 30px;
+        border-radius: 30px;
+        margin-left: -20px;
+        font-weight: 600;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transform: translateX(20px);
+        transition: all 0.3s ease;
+        pointer-events: none;
+    }
+
+    /* Hover Effect */
+    .floating-whatsapp:hover .whatsapp-text {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .floating-whatsapp:hover .whatsapp-icon {
+        transform: scale(1.1);
+        background-color: #128C7E;
+    }
+
+    /* Responsive Mobile */
+    @media (max-width: 768px) {
+        .whatsapp-text {
+            display: none;
+            /* Sembunyikan teks di HP agar tidak memenuhi layar */
+        }
+
+        .floating-whatsapp {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .whatsapp-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 30px;
+        }
     }
 </style>

@@ -18,19 +18,19 @@ class AuthController extends Controller
     {
         $data = $request->validate(
             [
-                'name' => 'required',
+                'email' => 'required',
                 'password' => 'required',
             ],
             [
-                'name.required' => 'Username wajib diisi',
+                'email.required' => 'Email salah',
                 'password.required' => 'Password wajib diisi',
             ]
         );
 
-        $user = User::where('name', $data['name'])->first();
+        $user = User::where('email', $data['email'])->first();
 
         if (!$user || !Hash::check($data['password'], $user->password)) {
-            return back()->withErrors(['name' => 'Username atau password salah'])->withInput();
+            return back()->withErrors(['email' => 'Email atau password salah'])->withInput();
         }
 
         Auth::login($user);

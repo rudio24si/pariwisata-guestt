@@ -26,13 +26,9 @@
                     <!-- Avatar / Profile Picture Side -->
                     <div class="col-md-4 bg-light p-5 text-center border-end">
                         <div class="mb-4">
-                            <div class="avatar-circle mx-auto mb-3 position-relative">
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80"
-                                    alt="Foto Pengembang" class="rounded-circle w-100 h-100 object-cover">
-                                <div
-                                    class="position-absolute bottom-0 end-0 bg-primary rounded-circle p-2 border border-3 border-white">
-                                    <i class="bi bi-check-circle-fill text-white fs-6"></i>
-                                </div>
+                            <div class=" mx-auto mb-3 position-relative">
+                                <img src="{{asset('assets/img/profile.jpg')}}" alt="Foto Pengembang"
+                                    class="rounded-circle w-100 h-100">
                             </div>
                             <h3 class="mb-1">Rudio Winaldo</h3>
                             <p class="text-muted mb-3">

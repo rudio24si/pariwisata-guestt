@@ -9,17 +9,20 @@ use App\Http\Controllers\BookingHomestayController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UlasanWisataController;
+use App\Models\DestinasiWisata;
+use App\Models\Homestay;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
 //     return view('dashboard');
 // });
-
-Route::get('/identitas', function () {
-    return view('pages.identitas');
-})->name('identitas');
 Route::get('/tentang', function () {
-    return view('pages.tentang');
+    // Mengambil jumlah total data dari database
+    $totalHomestay = Homestay::count();
+    $totalDestinasi = DestinasiWisata::count();
+
+    // Kirim data ke view menggunakan compact
+    return view('pages.tentang', compact('totalHomestay', 'totalDestinasi'));
 })->name('tentang');
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -38,7 +41,7 @@ Route::group(['middleware' => ['checkislogin']], function () {
         Route::resource('user', UserController::class);
         Route::resource('warga', WargaController::class);
     });
-    
+
     Route::resource('destinasi-wisata', DestinasiWisataController::class);
     Route::resource('homestay', HomestayController::class);
     Route::resource('kamar-homestay', KamarHomestayController::class);

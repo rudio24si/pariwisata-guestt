@@ -37,9 +37,9 @@
                 <label class="form-label fw-medium">Role *</label>
                 <select name="role" class="form-select @error('role') is-invalid @enderror" required>
                     <option value="" selected disabled>-- Pilih Role --</option>
-                    <option value="Super Admin" {{ old('role') == 'super_admin' ? 'selected' : '' }}>Super Admin</option>
-                    <option value="Pelanggan" {{ old('role') == 'pelanggan' ? 'selected' : '' }}>Pelanggan</option>
-                    <option value="Mitra" {{ old('role') == 'mitra' ? 'selected' : '' }}>Mitra</option>
+                    <option value="Super Admin" {{ old('role') == 'Super Admin' ? 'selected' : '' }}>Super Admin</option>
+                    <option value="Pelanggan" {{ old('role') == 'Pelanggan' ? 'selected' : '' }}>Pelanggan</option>
+                    <option value="Mitra" {{ old('role') == 'Mitra' ? 'selected' : '' }}>Mitra</option>
                 </select>
                 @error('role') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
