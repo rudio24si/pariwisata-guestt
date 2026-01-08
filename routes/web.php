@@ -17,11 +17,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('dashboard');
 // });
 Route::get('/tentang', function () {
-    // Mengambil jumlah total data dari database
     $totalHomestay = Homestay::count();
     $totalDestinasi = DestinasiWisata::count();
 
-    // Kirim data ke view menggunakan compact
     return view('pages.tentang', compact('totalHomestay', 'totalDestinasi'));
 })->name('tentang');
 

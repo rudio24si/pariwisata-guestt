@@ -13,7 +13,6 @@ class DestinasiWisataController extends Controller
      */
     public function index(Request $request)
     {
-        // Tambahkan 'media' di sini
         $query = DestinasiWisata::with(['ulasan', 'media']);
 
         if ($request->filled('search')) {
@@ -53,12 +52,10 @@ class DestinasiWisataController extends Controller
             'deskripsi' => 'nullable',
             'alamat' => 'required',
             'tiket' => 'required|numeric|min:0',
-            // Validasi file (disesuaikan dengan gambar referensi Anda)
             'filename' => 'required',
             'filename.*' => 'mimes:jpg,jpeg,png|max:3000'
         ]);
 
-        // 1. Simpan Destinasi Utama
         $destinasi = DestinasiWisata::create($request->all());
 
         if ($request->hasFile('filename')) {
@@ -66,7 +63,6 @@ class DestinasiWisataController extends Controller
 
             foreach ($request->file('filename') as $file) {
                 if ($file->isValid()) {
-                    // Penamaan file (sesuai logika gambar Anda)
                     $filename = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
                     $file->move(public_path('images'), $filename);
 
@@ -80,9 +76,6 @@ class DestinasiWisataController extends Controller
                     ];
                 }
             }
-
-            // 3. Simpan ke tabel media
-            // Pastikan Modelnya sesuai (misal: Media atau FotoDestinasi)
             Media::insert($filesData);
         }
 
@@ -115,32 +108,26 @@ class DestinasiWisataController extends Controller
     {
         $destinasi = DestinasiWisata::findOrFail($id);
 
-        // Validasi data
         $request->validate([
             'nama' => 'required|max:150',
             'tiket' => 'required|numeric',
             'filename.*' => 'nullable|mimes:jpg,jpeg,png|max:3000'
         ]);
 
-        // Update data utama
         $destinasi->update($request->all());
 
-        // A. Logika HAPUS foto yang diceklis
         if ($request->has('delete_media')) {
             foreach ($request->delete_media as $mediaId) {
                 $media = Media::find($mediaId);
                 if ($media) {
-                    // Hapus file fisik dari folder public/images
                     if (file_exists(public_path('images/' . $media->file_name))) {
                         unlink(public_path('images/' . $media->file_name));
                     }
-                    // Hapus record di database
                     $media->delete();
                 }
             }
         }
 
-        // B. Logika TAMBAH foto baru (sama seperti fungsi store)
         if ($request->hasFile('filename')) {
             foreach ($request->file('filename') as $file) {
                 $filename = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());

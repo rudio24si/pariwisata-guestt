@@ -8,28 +8,18 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('ulasan_wisata', function (Blueprint $table) {
-            // Primary Key menggunakan ulasan_id sesuai gambar kamu
             $table->id('ulasan_id');
-
-            // Foreign Key ke tabel destinasi_wisata
-            // Pastikan kolom destinasi_id di tabel induk bertipe bigIncrements/id
             $table->unsignedBigInteger('destinasi_id');
-
-            // Foreign Key ke tabel users (warga_id)
             $table->unsignedBigInteger('warga_id');
-
             $table->integer('rating');
             $table->text('komentar');
-            $table->timestamp('waktu'); // Kolom waktu sesuai permintaan
-
-            // Definisi Relasi (Foreign Key Constraints)
+            $table->timestamp('waktu');
             $table->foreign('destinasi_id')
-                ->references('destinasi_id') // Nama PK di tabel destinasi
-                ->on('destinasi_wisata')     // Nama tabel destinasi kamu
+                ->references('destinasi_id')
+                ->on('destinasi_wisata')
                 ->onDelete('cascade');
-
             $table->foreign('warga_id')
-                ->references('id')           // Biasanya PK di tabel users adalah 'id'
+                ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
         });

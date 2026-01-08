@@ -12,9 +12,10 @@ class UserSeeder extends Seeder
     {
         // Membuat 1 user admin tetap (agar kamu bisa login)
         User::create([
-            'name' => 'Admin Utama',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password123'),
+            'name' => 'rudio',
+            'email' => 'rudiow@example.com',
+            'password' => Hash::make('Rudio12345'),
+            'role' => 'Super Admin',
         ]);
 
         // Membuat 100 data user acak menggunakan Factory

@@ -14,15 +14,12 @@ class KamarHomestayController extends Controller
      */
     public function index(Request $request)
     {
-        // MODIFIKASI: Tambahkan with('media') untuk mengambil data foto sekaligus
         $query = KamarHomestay::with(['media', 'homestay']);
 
-        // 1. Fitur Search berdasarkan Nama Kamar
         if ($request->filled('search')) {
             $query->where('nama_kamar', 'LIKE', '%' . $request->search . '%');
         }
 
-        // 2. Fitur Filter berdasarkan Harga
         if ($request->filled('sort')) {
             if ($request->sort == 'termurah') {
                 $query->orderBy('harga', 'asc');
@@ -33,7 +30,6 @@ class KamarHomestayController extends Controller
             $query->latest();
         }
 
-        // 3. Pagination
         $kamars = $query->paginate(6)->withQueryString();
 
         return view('pages.kamar_homestay.index', compact('kamars'));
@@ -72,8 +68,6 @@ class KamarHomestayController extends Controller
                 $filename = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
                 $file->move(public_path('images'), $filename);
 
-                // Tambahkan ke database melalui model Media
-                // Pastikan Anda sudah mengimpor use App\Models\Media; di atas
                 Media::create([
                     'file_name' => $filename,
                     'ref_id' => $kamarHomestay->kamar_id,
@@ -90,7 +84,6 @@ class KamarHomestayController extends Controller
      */
     public function show(KamarHomestay $kamarHomestay)
     {
-        // Eager load homestay dengan data yang diperlukan
         $kamarHomestay->load([
             'homestay' => function ($query) {
                 $query->select('homestay_id', 'nama', 'alamat', 'rt', 'rw', 'status');
@@ -134,8 +127,6 @@ class KamarHomestayController extends Controller
                 $filename = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
                 $file->move(public_path('images'), $filename);
 
-                // Tambahkan ke database melalui model Media
-                // Pastikan Anda sudah mengimpor use App\Models\Media; di atas
                 Media::create([
                     'file_name' => $filename,
                     'ref_id' => $kamarHomestay->kamar_id,

@@ -27,7 +27,8 @@
                         <div class="mb-4">
                             <div class="avatar-circle mx-auto mb-3">
                                 {{-- Icon User Standar --}}
-                                <i class="bi bi-person text-primary" style="font-size: 5rem;"></i>
+                                <!-- <i class="bi bi-person text-primary" style="font-size: 5rem;"></i> -->
+                                <img src="{{ Storage::url($user->profile_picture) }}" alt="" class="rounded-circle">
                             </div>
                             <h3 class="mb-1">{{ $user->name }}</h3>
                         </div>

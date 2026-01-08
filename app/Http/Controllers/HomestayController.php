@@ -16,12 +16,10 @@ class HomestayController extends Controller
     {
         $query = Homestay::query();
 
-        // 1. Fitur Search Berdasarkan Nama
         if ($request->filled('search')) {
             $query->where('nama', 'LIKE', '%' . $request->search . '%');
         }
 
-        // 2. Fitur Filter Berdasarkan Harga
         if ($request->filled('sort')) {
             if ($request->sort == 'termurah') {
                 $query->orderBy('harga_per_malam', 'asc');
@@ -29,7 +27,7 @@ class HomestayController extends Controller
                 $query->orderBy('harga_per_malam', 'desc');
             }
         } else {
-            $query->latest(); // Default urutan terbaru jika tidak ada filter
+            $query->latest(); 
         }
         $homestays = $query->paginate(6)->withQueryString();
 
@@ -63,21 +61,17 @@ class HomestayController extends Controller
             'filename.*' => 'image|mimes:jpg,jpeg,png|max:4000'
         ]);
 
-        // 1. Simpan Homestay
         $homestay = Homestay::create($validated);
 
-        // 2. Simpan Foto ke Tabel Media
         if ($request->hasFile('filename')) {
             foreach ($request->file('filename') as $file) {
                 $filename = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
                 $file->move(public_path('images'), $filename);
 
-                // Tambahkan ke database melalui model Media
-                // Pastikan Anda sudah mengimpor use App\Models\Media; di atas
                 Media::create([
                     'file_name' => $filename,
-                    'ref_id' => $homestay->homestay_id, // Mengambil ID homestay yang baru dibuat
-                    'ref_table' => 'homestay',            // MENGATASI ERROR Gambar 2
+                    'ref_id' => $homestay->homestay_id, 
+                    'ref_table' => 'homestay',            
                 ]);
             }
         }
@@ -90,7 +84,6 @@ class HomestayController extends Controller
      */
     public function show(Homestay $homestay)
     {
-        // Load relasi pemilik dengan data yang dibutuhkan
         $homestay->load([
             'pemilik' => function ($query) {
                 $query->select('warga_id', 'nama', 'no_ktp', 'telp', 'email');
@@ -124,15 +117,12 @@ class HomestayController extends Controller
             'delete_media' => 'nullable|array',
         ]);
 
-        // 1. Update data homestay
         $homestay->update($validated);
 
-        // 2. Hapus foto yang dipilih (jika ada)
         if ($request->has('delete_media')) {
             foreach ($request->delete_media as $mediaId) {
                 $media = Media::find($mediaId);
                 if ($media) {
-                    // Hapus file fisik
                     if (file_exists(public_path('images/' . $media->file_name))) {
                         unlink(public_path('images/' . $media->file_name));
                     }
@@ -141,7 +131,6 @@ class HomestayController extends Controller
             }
         }
 
-        // 3. Tambah foto baru (jika ada)
         if ($request->hasFile('filename')) {
             foreach ($request->file('filename') as $file) {
                 $filename = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
@@ -150,7 +139,7 @@ class HomestayController extends Controller
                 \App\Models\Media::create([
                     'file_name' => $filename,
                     'ref_id' => $homestay->homestay_id,
-                    'ref_table' => 'homestay', // Penting agar relasi sinkron
+                    'ref_table' => 'homestay',
                 ]);
             }
         }
